@@ -11,5 +11,4 @@ data class PrayerResults(
     @SerializedName("data")
     var results: TimesObject
 
-
 )

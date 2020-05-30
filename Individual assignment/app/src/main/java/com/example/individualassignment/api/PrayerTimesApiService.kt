@@ -1,4 +1,4 @@
-package com.example.individualassignment
+package com.example.individualassignment.api
 
 import com.example.individualassignment.model.PrayerResults
 import retrofit2.Call
