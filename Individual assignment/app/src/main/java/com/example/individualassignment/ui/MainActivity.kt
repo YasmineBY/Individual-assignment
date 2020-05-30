@@ -1,15 +1,18 @@
 package com.example.individualassignment.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import androidx.lifecycle.MutableLiveData
 import com.example.individualassignment.PrayerTimesApiService
 import com.example.individualassignment.R
 import com.example.individualassignment.model.PrayerResults
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_navigation.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -25,15 +28,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            testCall()
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show()
-        }
+
+
+        initNavigation()
+
     }
 
-    fun testCall()  {
-      var call =   createApi()
+    fun testCall() {
+        var call = createApi()
         val movie = MutableLiveData<PrayerResults>()
         val error = MutableLiveData<String>()
 
@@ -83,8 +85,13 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
 
-
+    fun initNavigation() {
+        btnListRetrievePrayers.setOnClickListener {
+            val intent = Intent(this@MainActivity, RetrievedPrayersActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
