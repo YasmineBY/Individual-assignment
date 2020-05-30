@@ -12,14 +12,16 @@ import kotlinx.android.synthetic.main.prayer_item.view.*
 class PrayerTimesAdapter (private val prayers: List<PrayerDetails>) : RecyclerView.Adapter<PrayerTimesAdapter.ViewHolder>() {
 
 
+    val prayerNames: List<String> =  listOf("fajr", "sunrise", "duhr", "asr", "maghrib", "isha")
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(prayer: PrayerDetails) {
             itemView.txtItemPrayerName.text = "fajr"
-            itemView.txtItemPrayerTime.text = prayer.timings.fajr
-//            itemView.txtGameName.text = game.title
-//            itemView.txtPlatform.text = game.platform
-//            itemView.txtDate.text = game.releaseDate.toString()
+            itemView.txtItemPrayeTime.text = prayer.timings.fajr
+
+            itemView.txtItemPrayerNameSunrise.text =  "sunrise"
+            itemView.txtItemPrayerTimeSunrise.text = prayer.timings.sunrise
+
         }
     }
 

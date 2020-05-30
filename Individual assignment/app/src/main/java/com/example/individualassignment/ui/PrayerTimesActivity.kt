@@ -35,6 +35,7 @@ class PrayerTimesActivity : AppCompatActivity() {
     fun initViews() {
         initalizeRecyclerView()
         initNavigation()
+        viewModel.getPrayerTimes()
     }
 
     private fun observeViewModel() {
@@ -52,7 +53,9 @@ class PrayerTimesActivity : AppCompatActivity() {
         prayers = ArrayList<PrayerDetails>()
         prayerTimesAdapter = PrayerTimesAdapter(prayers)
         viewManager = LinearLayoutManager(this)
+
         observeViewModel()
+
         recyclerView.addItemDecoration(
             DividerItemDecoration(
                 this@PrayerTimesActivity,
@@ -75,8 +78,5 @@ class PrayerTimesActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btnListRetrievePrayers.setOnClickListener {
-            viewModel.getPrayerTimes()
-        }
     }
 }
