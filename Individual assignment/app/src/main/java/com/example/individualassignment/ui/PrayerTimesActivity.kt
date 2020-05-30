@@ -33,6 +33,16 @@ class PrayerTimesActivity : AppCompatActivity() {
 
     }
 
+
+//    private fun observeViewModel() {
+//        viewModel.listOfMovies.observe(this, Observer {
+//                movies ->
+//            this@MainActivity.movies.clear()
+//            this@MainActivity.movies.addAll(movies)
+//            movieAdapter.notifyDataSetChanged()
+//        })
+//    }
+
 //    private fun initalizeRecyclerView() {
 //
 //        recyclerView = findViewById(R.id.rvMovies)

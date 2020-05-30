@@ -5,10 +5,14 @@ import com.google.gson.annotations.SerializedName
 
 
 @Entity(tableName = "prayer_results_table")
-data class PrayerResults(
+data class ResultObject(
     @SerializedName("status")
     var status: String,
-    @SerializedName("data")
-    var results: TimesObject
 
+
+    @SerializedName("code")
+    var code: String,
+
+    @SerializedName("data")
+    var data: Array<EmptyArrayObject>
 )
