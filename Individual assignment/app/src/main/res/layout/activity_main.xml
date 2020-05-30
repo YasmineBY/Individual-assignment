@@ -49,8 +49,8 @@
     <fragment
         android:id="@+id/fragment3"
         android:name="com.example.individualassignment.ui.fragments.NavigationFragment"
-        android:layout_width="238dp"
-        android:layout_height="91dp"
+        android:layout_width="274dp"
+        android:layout_height="100dp"
         android:layout_gravity="bottom|center"
 
         app:layout_constraintBottom_toBottomOf="parent"
