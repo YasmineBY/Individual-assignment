@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initNavigation() {
+
+
         btnListRetrievePrayers.setOnClickListener {
             val intent = Intent(this@MainActivity, PrayerTimesActivity::class.java)
             startActivity(intent)

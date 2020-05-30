@@ -5,16 +5,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.individualassignment.R
+import com.example.individualassignment.model.PrayerDetails
 import com.example.individualassignment.model.PrayerObject
 import kotlinx.android.synthetic.main.prayer_item.view.*
 
-class PrayerTimesAdapter (private val prayers: List<PrayerObject>) : RecyclerView.Adapter<PrayerTimesAdapter.ViewHolder>() {
+class PrayerTimesAdapter (private val prayers: List<PrayerDetails>) : RecyclerView.Adapter<PrayerTimesAdapter.ViewHolder>() {
 
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(prayer: PrayerObject) {
-            itemView.txtItemPrayerName.text = prayer.fajr
+        fun bind(prayer: PrayerDetails) {
+            itemView.txtItemPrayerName.text = "fajr"
+            itemView.txtItemPrayerTime.text = prayer.timings.fajr
 //            itemView.txtGameName.text = game.title
 //            itemView.txtPlatform.text = game.platform
 //            itemView.txtDate.text = game.releaseDate.toString()

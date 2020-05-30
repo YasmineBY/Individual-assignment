@@ -4,17 +4,21 @@ import android.content.Intent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.individualassignment.R
 import com.example.individualassignment.adapter.PrayerTimesAdapter
+import com.example.individualassignment.model.PrayerDetails
 import com.example.individualassignment.model.PrayerObject
 import com.example.individualassignment.vm.PrayerTimesActivityViewModel
 import kotlinx.android.synthetic.main.fragment_navigation.*
 
 class PrayerTimesActivity : AppCompatActivity() {
 
-    private lateinit var prayers: ArrayList<PrayerObject>
+    private lateinit var prayers: ArrayList<PrayerDetails>
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var prayerTimesAdapter: PrayerTimesAdapter
@@ -24,43 +28,45 @@ class PrayerTimesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_retrieved_prayers)
-        initNavigation()
         initViews()
     }
 
 
     fun initViews() {
-
+        initalizeRecyclerView()
+        initNavigation()
     }
 
+    private fun observeViewModel() {
+        viewModel.listOfPrayers.observe(this, Observer {
+                prayers ->
+            this@PrayerTimesActivity.prayers.clear()
+            this@PrayerTimesActivity.prayers.addAll(prayers)
+            prayerTimesAdapter.notifyDataSetChanged()
+        })
+    }
 
-//    private fun observeViewModel() {
-//        viewModel.listOfMovies.observe(this, Observer {
-//                movies ->
-//            this@MainActivity.movies.clear()
-//            this@MainActivity.movies.addAll(movies)
-//            movieAdapter.notifyDataSetChanged()
-//        })
-//    }
+    private fun initalizeRecyclerView() {
 
-//    private fun initalizeRecyclerView() {
-//
-//        recyclerView = findViewById(R.id.rvMovies)
-//        movies = arrayListOf()
-//        movieAdapter = MovieAdapter(
-//            movies,
-//            { movies -> onMovieClick(movies) })
-//        viewManager = GridLayoutManager(this, 2)
-//
-//        observeViewModel()
-//
-//        recyclerView.apply {
-//            setHasFixedSize(true)
-//            layoutManager = viewManager
-//            adapter = movieAdapter
-//        }
-//    }
+        recyclerView = findViewById(R.id.rvRetrievedPrayers)
+        prayers = ArrayList<PrayerDetails>()
+        prayerTimesAdapter = PrayerTimesAdapter(prayers)
+        viewManager = LinearLayoutManager(this)
+        observeViewModel()
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this@PrayerTimesActivity,
+                DividerItemDecoration.VERTICAL
+            )
+        )
 
+        recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = prayerTimesAdapter
+        }
+
+    }
 
     //todo backtrack later to add the Edit screen
     fun initNavigation() {
@@ -68,11 +74,9 @@ class PrayerTimesActivity : AppCompatActivity() {
             val intent = Intent(this@PrayerTimesActivity, MainActivity::class.java)
             startActivity(intent)
         }
+
         btnListRetrievePrayers.setOnClickListener {
             viewModel.getPrayerTimes()
         }
-
     }
-
-
 }

@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.individualassignment.api.PrayerTimesRepositry
-import com.example.individualassignment.model.PrayerResult
+import com.example.individualassignment.model.PrayerDetails
 import com.example.individualassignment.model.ResultObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,7 +14,8 @@ class PrayerTimesActivityViewModel(application: Application) : AndroidViewModel(
 
         var prayerTimesRepositry: PrayerTimesRepositry = PrayerTimesRepositry()
         var error = MutableLiveData<String>()
-        var listOfPrayers = MutableLiveData<ResultObject>()
+//        var listOfPrayers = MutableLiveData<ResultObject>()
+        var listOfPrayers = MutableLiveData<Array<PrayerDetails>>()
 
 
     fun getPrayerTimes() {
@@ -22,7 +23,9 @@ class PrayerTimesActivityViewModel(application: Application) : AndroidViewModel(
             override fun onResponse(call: Call<ResultObject>, response: Response<ResultObject>) {
                 if (response.isSuccessful) {
                     var results = response.body()
-                    listOfPrayers.value = results
+                    if (results != null) {
+                        listOfPrayers.value = results.data
+                    }
                     println(results)
                 } else error.value = "An error occurred: ${response.errorBody().toString()}"
             }
