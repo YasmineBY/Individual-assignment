@@ -9,10 +9,11 @@ data class ResultObject(
     @SerializedName("status")
     var status: String,
 
-
     @SerializedName("code")
     var code: String,
 
     @SerializedName("data")
     var data: Array<EmptyArrayObject>
+
+
 )

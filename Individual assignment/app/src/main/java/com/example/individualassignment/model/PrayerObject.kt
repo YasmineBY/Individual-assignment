@@ -8,6 +8,9 @@ import com.google.gson.annotations.SerializedName
 data class PrayerObject (
 
     @SerializedName("fajr")
-    var fajr: String
+    var fajr: String,
+
+    @SerializedName("Sunrise")
+    var Sunrise: String
 
 )

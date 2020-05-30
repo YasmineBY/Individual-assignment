@@ -4,10 +4,10 @@ import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "timings_table")
-data class PrayerResult(
+data class  PrayerResult(
 
     @SerializedName("timings")
-    var timings: List<String>
+    var timings: PrayerObject
 
 //    @SerializedName("timings")
 //    var timings: List<PrayerObject>,
