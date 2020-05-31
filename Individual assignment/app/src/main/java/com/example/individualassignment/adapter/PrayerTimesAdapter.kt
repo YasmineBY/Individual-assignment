@@ -5,8 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.individualassignment.R
-import com.example.individualassignment.model.PrayerDetails
-import com.example.individualassignment.model.PrayerObject
+import com.example.individualassignment.model.apimodel.PrayerDetails
 import kotlinx.android.synthetic.main.prayer_item.view.*
 
 class PrayerTimesAdapter (private val prayers: List<PrayerDetails>) : RecyclerView.Adapter<PrayerTimesAdapter.ViewHolder>() {

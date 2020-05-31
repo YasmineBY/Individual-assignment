@@ -1,6 +1,7 @@
-package com.example.individualassignment.model
+package com.example.individualassignment.model.apimodel
 
 import androidx.room.Entity
+import com.example.individualassignment.model.apimodel.PrayerDetails
 import com.google.gson.annotations.SerializedName
 
 

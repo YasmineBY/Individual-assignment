@@ -1,4 +1,4 @@
-package com.example.individualassignment.model
+package com.example.individualassignment.model.apimodel
 
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName

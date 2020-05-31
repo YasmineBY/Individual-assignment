@@ -1,6 +1,6 @@
 package com.example.individualassignment.api
 
-import com.example.individualassignment.model.ResultObject
+import com.example.individualassignment.model.apimodel.ResultObject
 import retrofit2.Call
 import retrofit2.http.GET
 

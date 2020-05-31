@@ -5,14 +5,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.individualassignment.R
 import com.example.individualassignment.adapter.PrayerTimesAdapter
-import com.example.individualassignment.model.PrayerDetails
-import com.example.individualassignment.model.PrayerObject
+import com.example.individualassignment.model.apimodel.PrayerDetails
 import com.example.individualassignment.vm.PrayerTimesActivityViewModel
 import kotlinx.android.synthetic.main.fragment_navigation.*
 

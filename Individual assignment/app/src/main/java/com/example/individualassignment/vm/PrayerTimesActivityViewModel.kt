@@ -4,8 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.individualassignment.api.PrayerTimesRepositry
-import com.example.individualassignment.model.PrayerDetails
-import com.example.individualassignment.model.ResultObject
+import com.example.individualassignment.model.apimodel.PrayerDetails
+import com.example.individualassignment.model.apimodel.PrayerObject
+import com.example.individualassignment.model.apimodel.ResultObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,6 +17,7 @@ class PrayerTimesActivityViewModel(application: Application) : AndroidViewModel(
         var error = MutableLiveData<String>()
 //        var listOfPrayers = MutableLiveData<ResultObject>()
         var listOfPrayers = MutableLiveData<Array<PrayerDetails>>()
+             var listOfPrayersOnly = MutableLiveData<List<PrayerObject>>()
 
 
     fun getPrayerTimes() {
