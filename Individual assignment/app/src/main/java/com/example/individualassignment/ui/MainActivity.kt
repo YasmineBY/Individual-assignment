@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -36,19 +37,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        initNavigation()
+        initViews()
 
     }
 
     fun initViews() {
-        val calendar = Calendar.getInstance()
-        calendar.set(2020,1,1)
-            var customPrayer: CustomPrayer = CustomPrayer(
-            "test",
-                calendar.time,
-                calendar.time,
-                calendar.time
-            )
+        initalizeRecyclerView()
+        initNavigation()
     }
 
 
@@ -56,8 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.rvCustomPrayers)
         prayers = arrayListOf()
-        customPrayerAdapter = CustomPrayerAdapter(prayers,
-        { prayers -> onMovieClick( prayers) })
+        customPrayerAdapter = CustomPrayerAdapter(prayers)
 
         viewManager = LinearLayoutManager(this)
         createItemTouchHelper().attachToRecyclerView(recyclerView)
@@ -81,8 +75,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun onMovieClick(prayer: CustomPrayer) {
         Snackbar.make(rvCustomPrayers, "This color is:", Snackbar.LENGTH_LONG).show()
-
     }
+
     private fun observeViewModel() {
         viewModel.listOfPrayers.observe(this, Observer {
                 prayers ->
@@ -108,12 +102,25 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     fun initNavigation() {
+
+        val calendar = Calendar.getInstance()
+        calendar.set(2020,1,1)
+        var customPrayer: CustomPrayer = CustomPrayer(
+            "test",
+            calendar.time,
+            calendar.time,
+            calendar.time
+        )
+
         btnListRetrievePrayers.setOnClickListener {
             val intent = Intent(this@MainActivity, PrayerTimesActivity::class.java)
             startActivity(intent)
         }
-
+        btnHome.setOnClickListener {
+            viewModel.addNewCustomPrayer(customPrayer)
+        }
     }
 
     private fun createItemTouchHelper(): ItemTouchHelper {

@@ -8,6 +8,8 @@ import com.example.individualassignment.database.CustomPrayerRepository
 import com.example.individualassignment.model.CustomPrayer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -15,12 +17,16 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     private val customPrayerRepository = CustomPrayerRepository(application.applicationContext)
     private val mainScope = CoroutineScope(Dispatchers.Main)
 
-
     val listOfPrayers: LiveData<List<CustomPrayer>> = customPrayerRepository.getAllCustomPrayers()
-
 
     val error = MutableLiveData<String?>()
     val success = MutableLiveData<Boolean>()
 
-
+    fun addNewCustomPrayer(customPrayer: CustomPrayer) {
+        mainScope.launch {
+            withContext(Dispatchers.IO) {
+                customPrayerRepository.insertCustomPrayer(customPrayer)
+            }
+        }
+    }
 }
