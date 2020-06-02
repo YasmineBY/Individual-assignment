@@ -29,7 +29,6 @@ abstract class CustomPrayerRoomDatabase : RoomDatabase() {
                                 DATABASE_NAME
                             ).build()
                     }
-
                 }
             }
             return customPrayerTimeRoomDatabaseInstace

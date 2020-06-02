@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -51,7 +50,8 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.rvCustomPrayers)
         prayers = arrayListOf()
-        customPrayerAdapter = CustomPrayerAdapter(prayers)
+        customPrayerAdapter = CustomPrayerAdapter(prayers,
+            { customPrayer -> onCustomPrayerClick(customPrayer) })
 
         viewManager = LinearLayoutManager(this)
         createItemTouchHelper().attachToRecyclerView(recyclerView)
@@ -73,8 +73,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun onMovieClick(prayer: CustomPrayer) {
-        Snackbar.make(rvCustomPrayers, "This color is:", Snackbar.LENGTH_LONG).show()
+    private fun onCustomPrayerClick(prayer: CustomPrayer) {
+        Snackbar.make(rvCustomPrayers, "This :", Snackbar.LENGTH_LONG).show()
     }
 
     private fun observeViewModel() {
@@ -108,11 +108,12 @@ class MainActivity : AppCompatActivity() {
         val calendar = Calendar.getInstance()
         calendar.set(2020,1,1)
         var customPrayer: CustomPrayer = CustomPrayer(
-            "test",
+            "Another Test",
             calendar.time,
             calendar.time,
             calendar.time
         )
+
 
         btnListRetrievePrayers.setOnClickListener {
             val intent = Intent(this@MainActivity, PrayerTimesActivity::class.java)
@@ -121,6 +122,11 @@ class MainActivity : AppCompatActivity() {
         btnHome.setOnClickListener {
             viewModel.addNewCustomPrayer(customPrayer)
         }
+        btnAddPrayers.setOnClickListener {
+            val intent = Intent(this@MainActivity, AddCustomPrayerActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun createItemTouchHelper(): ItemTouchHelper {
