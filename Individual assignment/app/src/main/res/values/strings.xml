@@ -15,4 +15,5 @@
     <string name="title_activity_add_custom_prayer">AddCustomPrayerActivity</string>
     <string name="add_prayer">Add your custom prayer here</string>
     <string name="custom_prayer_name">Name of prayer</string>
+    <string name="name">Name</string>
 </resources>
