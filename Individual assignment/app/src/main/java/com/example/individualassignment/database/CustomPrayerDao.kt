@@ -1,10 +1,7 @@
 package com.example.individualassignment.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.individualassignment.model.CustomPrayer
 
 
@@ -21,7 +18,12 @@ interface CustomPrayerDao {
     @Delete
     fun deleteCustomPrayer(customPrayer: CustomPrayer)
 
+    @Update
+    fun updatePrayer(customPrayer: CustomPrayer)
+
     @Query("DELETE FROM custom_Prayer_table")
     suspend fun deleteAllCustomPrayers()
+
+
 
 }

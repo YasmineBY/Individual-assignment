@@ -75,6 +75,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun onCustomPrayerClick(prayer: CustomPrayer) {
         Snackbar.make(rvCustomPrayers, "This :", Snackbar.LENGTH_LONG).show()
+
+        val intent = Intent(this@MainActivity, PopupEditCustomPrayerActivity::class.java)
+        startActivity(intent)
+
+
     }
 
     private fun observeViewModel() {
@@ -141,11 +146,12 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
 
-//             Callback triggered when a user swiped an item.
+//          Callback triggered when a user swiped an item.
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-//                val gameToDelete = games[position]
-//                viewModel.deleteGame(gameToDelete)
+                    var customPrayerToDelete = prayers[position]
+                    viewModel.deleteCustomPrayer(customPrayerToDelete)
+
             }
         }
         return ItemTouchHelper(callback)

@@ -11,10 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".ui.PopupEditCustomPrayerActivity"
+            android:theme="@style/AppTheme.customTheme" />
+
+
         <activity
             android:name=".ui.AddCustomPrayerActivity"
             android:label="@string/title_activity_add_custom_prayer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.PrayerTimesActivity" />
         <activity
             android:name=".ui.MainActivity"

@@ -29,4 +29,12 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
             }
         }
     }
+
+    fun deleteCustomPrayer(customPrayer: CustomPrayer) {
+        mainScope.launch {
+            withContext(Dispatchers.IO) {
+                customPrayerRepository.deleteCustomPrayer(customPrayer)
+            }
+        }
+    }
 }
