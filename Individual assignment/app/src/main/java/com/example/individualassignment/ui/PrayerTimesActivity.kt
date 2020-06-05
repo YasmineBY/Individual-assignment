@@ -12,6 +12,7 @@ import com.example.individualassignment.R
 import com.example.individualassignment.adapter.PrayerTimesAdapter
 import com.example.individualassignment.model.apimodel.PrayerDetails
 import com.example.individualassignment.vm.PrayerTimesActivityViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_navigation.*
 
 class PrayerTimesActivity : AppCompatActivity() {

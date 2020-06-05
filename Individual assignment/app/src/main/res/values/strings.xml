@@ -10,16 +10,21 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_add_custom_prayer">AddCustomPrayerActivity</string>
-    <string name="add_prayer">Add your custom prayer here</string>
 
-    <!--    add custom prayer screen-->
+
+    <!-- Pop-up Add custom prayer prayer -->
+
+    <string name="add_prayer">Add a new custom prayer</string>
+    <string name="add">Add </string>
+    <string name="cancel">Cancel </string>
     <string name="custom_prayer_name">Name of prayer</string>
     <string name="name">Name</string>
     <string name="day">day</string>
     <string name="month">month</string>
     <string name="year">year</string>
+    <string name="edit_custom_prayer">Edit custom prayer</string>
+    <string name="update_text">update</string>
 
 </resources>

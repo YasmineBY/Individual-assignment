@@ -2,10 +2,10 @@ package com.example.individualassignment.ui
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -15,14 +15,14 @@ import com.example.individualassignment.R
 import com.example.individualassignment.adapter.CustomPrayerAdapter
 import com.example.individualassignment.model.CustomPrayer
 import com.example.individualassignment.vm.MainActivityViewModel
-import com.google.android.material.snackbar.Snackbar
-
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_navigation.*
 import java.util.*
-import kotlin.collections.ArrayList
 
+
+
+
+const val CUSTOM_PRAYER: String = "CUSTOM_PRAYER"
 class MainActivity : AppCompatActivity() {
     private lateinit var prayers: ArrayList<CustomPrayer>
     private lateinit var recyclerView: RecyclerView
@@ -36,8 +36,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        initViews()
-
+      initViews()
     }
 
     fun initViews() {
@@ -74,10 +73,37 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun onCustomPrayerClick(prayer: CustomPrayer) {
-        Snackbar.make(rvCustomPrayers, "This :", Snackbar.LENGTH_LONG).show()
 
+        val prefs = this.getSharedPreferences(CUSTOM_PRAYER, 0)
+        val editor = prefs.edit()
+
+        editor.putString("PRAYER_NAME", prayer.prayerName)
+        editor.putString("PRAYER_DATE", prayer.prayerDate.toString())
+        editor.putString("START_TIME", prayer.startTime.toString())
+        editor.putString("END_TIME", prayer.endTime.toString())
+        editor.putString("ID", prayer.id.toString())
+        editor.commit()
+//        data class CustomPrayer (
+//            var prayerName: String,
+//            var prayerDate: Date,
+//            var startTime: Date,
+//            var endTime: Date,
+//            @PrimaryKey(autoGenerate = true)
+//            var id: Long? = null
+
+
+//        bundle.putString(PRAYER_NAME, prayer.prayerName)
+
+
+//        var selectedPrayer = prayer
         val intent = Intent(this@MainActivity, PopupEditCustomPrayerActivity::class.java)
+//        val extras: Bundle? = intent.extras
+//        if (extras != null) {
+//            extras.putAll(bundle)
+//        }
         startActivity(intent)
+
+
 
 
     }
@@ -112,6 +138,8 @@ class MainActivity : AppCompatActivity() {
 
         val calendar = Calendar.getInstance()
         calendar.set(2020,1,1)
+//        calendar.time(Calendar.HOUR_OF_DAY,2)
+        calendar.set(Calendar.HOUR_OF_DAY, 14);
         var customPrayer: CustomPrayer = CustomPrayer(
             "Another Test",
             calendar.time,

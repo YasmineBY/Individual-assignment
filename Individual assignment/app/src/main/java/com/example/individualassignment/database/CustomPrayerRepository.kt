@@ -23,6 +23,8 @@ class CustomPrayerRepository(context: Context) {
 
     suspend fun insertCustomPrayer(customPrayer: CustomPrayer)= customPrayerDao.insertCustomPrayer(customPrayer)
     suspend fun deleteCustomPrayer(customPrayer: CustomPrayer) = customPrayerDao.deleteCustomPrayer(customPrayer)
+    suspend fun updatePrayer(customPrayer: CustomPrayer) = customPrayerDao.updatePrayer(customPrayer)
+
     suspend fun deleteAllCustomPrayers()= customPrayerDao.deleteAllCustomPrayers()
 
 
