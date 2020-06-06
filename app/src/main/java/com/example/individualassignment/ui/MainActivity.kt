@@ -203,7 +203,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showAddProductdialog() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.add_prayer))
+//        builder.setTitle(getString(R.string.add_prayer))
         val dialogLayout = layoutInflater.inflate(R.layout.content_add_custom_prayer, null)
 //        val productName = dialogLayout.findViewById<EditText>(R.id.txt_product_name)
 //        val amount = dialogLayout.findViewById<EditText>(R.id.txt_amount)

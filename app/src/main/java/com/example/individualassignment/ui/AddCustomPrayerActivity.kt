@@ -13,11 +13,11 @@ class AddCustomPrayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_custom_prayer)
-        var displayMetrics  = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-        var width: Int = displayMetrics.widthPixels
-        var height: Int = displayMetrics.heightPixels
-        window.setLayout((width*.9).toInt(),  (height*.5).toInt())
+//        var displayMetrics  = DisplayMetrics()
+//        windowManager.defaultDisplay.getMetrics(displayMetrics)
+//        var width: Int = displayMetrics.widthPixels
+//        var height: Int = displayMetrics.heightPixels
+//        window.setLayout((width*.9).toInt(),  (height*.5).toInt())
     }
 
 }
