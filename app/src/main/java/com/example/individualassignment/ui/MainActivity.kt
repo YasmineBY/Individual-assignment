@@ -1,6 +1,5 @@
 package com.example.individualassignment.ui
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -19,13 +18,10 @@ import com.example.individualassignment.adapter.CustomPrayerAdapter
 import com.example.individualassignment.model.CustomPrayer
 import com.example.individualassignment.vm.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_add_custom_prayer.*
 import kotlinx.android.synthetic.main.content_add_custom_prayer.view.*
 import kotlinx.android.synthetic.main.item_navigation.*
 import java.text.SimpleDateFormat
 import java.util.*
-
-
 
 
 const val CUSTOM_PRAYER: String = "CUSTOM_PRAYER"
@@ -224,20 +220,40 @@ class MainActivity : AppCompatActivity() {
     private fun showAddNewCustomPrayer() {
         val builder = AlertDialog.Builder(this)
 //        builder.setTitle(getString(R.string.add_prayer))
+
+
+//        var newName = prayerName.text
+
         val dialogLayout = layoutInflater.inflate(R.layout.content_add_custom_prayer, null)
-        val prayerName = dialogLayout.findViewById<EditText>(R.id.etCustomPrayerName)
-        val prayerDate = dialogLayout.findViewById<EditText>(R.id.txtCustomPrayerDate)
 
         builder.setView(dialogLayout)
         builder.show()
 
         dialogLayout.btnCancelCustomPrayer.setOnClickListener   {
-            println(prayerName.text.toString())
 
+            val prayerName = dialogLayout.findViewById<EditText>(R.id.etCustomPrayerName)
+            val prayerDate = dialogLayout.findViewById<EditText>(R.id.txtCustomPrayerDate)
+            val startTime = dialogLayout.findViewById<EditText>(R.id.txtCustomPrayerDate)
+            val endTime = dialogLayout.findViewById<EditText>(R.id.txtCustomPrayerDate)
+            var newName: String = prayerName.getText().toString()
+            var newCustomPrayer = createNewPrayer(newName)
+
+            viewModel.addNewCustomPrayer(newCustomPrayer)
         }
     }
 
+    fun createNewPrayer(newName :  String): CustomPrayer {
+        var calendar = Calendar.getInstance()
 
+        var newCustomPrayer: CustomPrayer = CustomPrayer(
+            newName,
+            calendar.time,
+            calendar.time,
+            calendar.time
+        )
+        return newCustomPrayer
+
+    }
 
 
 
