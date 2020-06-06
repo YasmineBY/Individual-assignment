@@ -1,10 +1,13 @@
 package com.example.individualassignment.ui
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -169,8 +172,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.addNewCustomPrayer(customPrayer)
         }
         btnAddPrayers.setOnClickListener {
-            val intent = Intent(this@MainActivity, AddCustomPrayerActivity::class.java)
-            startActivity(intent)
+            showAddProductdialog()
         }
 
     }
@@ -197,6 +199,22 @@ class MainActivity : AppCompatActivity() {
         }
         return ItemTouchHelper(callback)
     }
+
+
+    private fun showAddProductdialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.add_prayer))
+        val dialogLayout = layoutInflater.inflate(R.layout.content_add_custom_prayer, null)
+//        val productName = dialogLayout.findViewById<EditText>(R.id.txt_product_name)
+//        val amount = dialogLayout.findViewById<EditText>(R.id.txt_amount)
+
+        builder.setView(dialogLayout)
+//        builder.setPositiveButton(R.string.dialog_ok_btn) { _: DialogInterface, _: Int ->
+//            addProduct(productName, amount)
+//        }
+        builder.show()
+    }
+
 
 }
 
