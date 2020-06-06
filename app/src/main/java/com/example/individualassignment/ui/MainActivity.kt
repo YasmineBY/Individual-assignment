@@ -25,6 +25,7 @@ import java.util.*
 
 
 const val CUSTOM_PRAYER: String = "CUSTOM_PRAYER"
+
 class MainActivity : AppCompatActivity() {
     private lateinit var prayers: ArrayList<CustomPrayer>
     private lateinit var recyclerView: RecyclerView
@@ -33,12 +34,11 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainActivityViewModel by viewModels()
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-      initViews()
+        initViews()
     }
 
     fun initViews() {
@@ -109,23 +109,21 @@ class MainActivity : AppCompatActivity() {
 //        var selectedPrayer = prayer
 //        val intent = Intent(this@MainActivity, PopupEditCustomPrayerActivity::class.java)
         val extras: Bundle? = intent.extras
-        intent.putExtra(CUSTOM_PRAYER,customPrayer)
+        intent.putExtra(CUSTOM_PRAYER, customPrayer)
 
         startActivity(intent)
-
-
 
 
     }
 
     private fun observeViewModel() {
-        viewModel.listOfPrayers.observe(this, Observer {
-                prayers ->
+        viewModel.listOfPrayers.observe(this, Observer { prayers ->
             this@MainActivity.prayers.clear()
             this@MainActivity.prayers.addAll(prayers)
             customPrayerAdapter.notifyDataSetChanged()
         })
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -146,7 +144,7 @@ class MainActivity : AppCompatActivity() {
 
     fun initNavigation() {
         val calendar = Calendar.getInstance()
-        calendar.set(2020,1,1)
+        calendar.set(2020, 1, 1)
         calendar.set(Calendar.HOUR_OF_DAY, 22)
 
 
@@ -154,7 +152,7 @@ class MainActivity : AppCompatActivity() {
         println(sdf)
         println("HELLO WORLD")
 
-        var customPrayer: CustomPrayer = CustomPrayer (
+        var customPrayer: CustomPrayer = CustomPrayer(
             "TESTING TIME SETTING22222222222S",
             calendar.time,
             calendar.time,
@@ -187,11 +185,11 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
 
-//          Callback triggered when a user swiped an item.
+            //          Callback triggered when a user swiped an item.
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                    var customPrayerToDelete = prayers[position]
-                    viewModel.deleteCustomPrayer(customPrayerToDelete)
+                var customPrayerToDelete = prayers[position]
+                viewModel.deleteCustomPrayer(customPrayerToDelete)
 
             }
         }
@@ -219,30 +217,58 @@ class MainActivity : AppCompatActivity() {
 
     private fun showAddNewCustomPrayer() {
         val builder = AlertDialog.Builder(this)
-//        builder.setTitle(getString(R.string.add_prayer))
-
-
-//        var newName = prayerName.text
-
         val dialogLayout = layoutInflater.inflate(R.layout.content_add_custom_prayer, null)
-
         builder.setView(dialogLayout)
         builder.show()
+        var prayerName = dialogLayout.findViewById<EditText>(R.id.etCustomPrayerName)
+        var day = dialogLayout.findViewById<EditText>(R.id.etDay)
+        var month = dialogLayout.findViewById<EditText>(R.id.etMonth)
+        var year = dialogLayout.findViewById<EditText>(R.id.etYear)
+        var startTime = dialogLayout.findViewById<EditText>(R.id.etStartTime)
+        var endTime = dialogLayout.findViewById<EditText>(R.id.etEndTime)
 
-        dialogLayout.btnCancelCustomPrayer.setOnClickListener   {
+        fun getNewPrayer(): String {
+            var calendar = Calendar.getInstance()
+            var day: Int = day.text.toString().toInt()
+            var month = month.text.toString().toInt()
+            var year = year.text.toString().toInt()
+            var startTime = startTime.text.toString().toInt()
+            var endTime =  endTime.text.toString().toInt()
 
-            val prayerName = dialogLayout.findViewById<EditText>(R.id.etCustomPrayerName)
-            val prayerDate = dialogLayout.findViewById<EditText>(R.id.txtCustomPrayerDate)
-            val startTime = dialogLayout.findViewById<EditText>(R.id.txtCustomPrayerDate)
-            val endTime = dialogLayout.findViewById<EditText>(R.id.txtCustomPrayerDate)
+
+//              calendar.set(year, day, month)
+//             var calendarStart =   calendar.set(Calendar.HOUR_OF_DAY, startTime)
+//             var calendarEnd =   calendar.set(Calendar.HOUR_OF_DAY, endTime)
+
             var newName: String = prayerName.getText().toString()
-            var newCustomPrayer = createNewPrayer(newName)
 
+
+//            calendar.set(year, day, month)
+//            calendar.set(Calendar.HOUR_OF_DAY, startTime)
+//            var calendarStart = calendar.time
+//            var calendarEnd = calendar.time
+
+            var newCustomPrayer: CustomPrayer = CustomPrayer(
+                newName,
+                calendar.time,
+                calendar.time,
+                calendar.time
+            )
+
+
+            return newName
+        }
+
+
+
+        dialogLayout.btnCancelCustomPrayer.setOnClickListener {
+            var newName: String = prayerName.getText().toString()
+            var newCustomPrayer = createNewPrayer(getNewPrayer())
             viewModel.addNewCustomPrayer(newCustomPrayer)
         }
     }
 
-    fun createNewPrayer(newName :  String): CustomPrayer {
+    fun createNewPrayer(newName: String): CustomPrayer {
         var calendar = Calendar.getInstance()
 
         var newCustomPrayer: CustomPrayer = CustomPrayer(
@@ -254,7 +280,6 @@ class MainActivity : AppCompatActivity() {
         return newCustomPrayer
 
     }
-
 
 
     private fun showEditDialog() {
