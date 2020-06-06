@@ -1,10 +1,10 @@
 package com.example.individualassignment.ui
 
 import android.content.Intent
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +15,9 @@ import com.example.individualassignment.model.ListViewPrayer
 import com.example.individualassignment.model.apimodel.PrayerDetails
 import com.example.individualassignment.vm.PrayerTimesActivityViewModel
 import kotlinx.android.synthetic.main.content_retrieved_prayers.*
-import kotlinx.android.synthetic.main.fragment_navigation.*
+import kotlinx.android.synthetic.main.item_navigation.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PrayerTimesActivity : AppCompatActivity() {
 
@@ -41,24 +43,30 @@ class PrayerTimesActivity : AppCompatActivity() {
     }
 
     private fun preparePrayerDataListView(prayers: Array<PrayerDetails>): ArrayList<ListViewPrayer> {
-        val listViewPrayer: ArrayList<ListViewPrayer> = ArrayList()
-        val prayerNames: List<String> =  listOf("fajr", "sunrise", "duhr", "asr", "maghrib", "isha")
-        for(prayer in prayers)  {
-            listViewPrayer.add(ListViewPrayer("fajr", prayer.timings.fajr))
-            listViewPrayer.add(ListViewPrayer("sunrise", prayer.timings.sunrise))
-//
-//            listViewPrayer.add(ListViewPrayer(prayer.timings.isha))
-//            listViewPrayer.add(ListViewPrayer(prayer.timings.duhr))
-//            listViewPrayer.add(ListViewPrayer(prayer.timings.asr))
-//            listViewPrayer.add(ListViewPrayer(prayer.timings.maghrib))
-        }
+        //to-do
+        //Make API call: This month, this year. : ListOfPrayers[Today] only
+
+        var currentDate = Calendar.getInstance()
+        var dayOfMonth: Int = currentDate.get(Calendar.DAY_OF_MONTH)
+        var prayersOfToday = prayers[dayOfMonth]
+        var listViewPrayer: ArrayList<ListViewPrayer> = ArrayList()
+
+        listViewPrayer.add(ListViewPrayer("fajr", prayersOfToday.timings.fajr))
+        listViewPrayer.add(ListViewPrayer("sunrise", prayersOfToday.timings.sunrise))
+        listViewPrayer.add(ListViewPrayer("duhr", prayersOfToday.timings.duhr))
+        listViewPrayer.add(ListViewPrayer("asr", prayersOfToday.timings.asr))
+        listViewPrayer.add(ListViewPrayer("maghrib", prayersOfToday.timings.maghrib))
+        listViewPrayer.add(ListViewPrayer("isha", prayersOfToday.timings.isha))
+
+
+
+
         return listViewPrayer
     }
 
     private fun observeViewModel() {
-        viewModel.listOfPrayers.observe(this, Observer {
-                prayers ->
-            var temp =  preparePrayerDataListView(prayers)
+        viewModel.listOfPrayers.observe(this, Observer { prayers ->
+            var temp = preparePrayerDataListView(prayers)
             this@PrayerTimesActivity.listViewPrayers.clear()
             this@PrayerTimesActivity.listViewPrayers.addAll(preparePrayerDataListView(prayers))
             prayerTimesAdapter.notifyDataSetChanged()
@@ -75,7 +83,7 @@ class PrayerTimesActivity : AppCompatActivity() {
 
         observeViewModel()
 
-        recyclerView.addItemDecoration  (
+        recyclerView.addItemDecoration(
             DividerItemDecoration(
                 this@PrayerTimesActivity,
                 DividerItemDecoration.VERTICAL

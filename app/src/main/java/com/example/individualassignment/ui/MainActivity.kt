@@ -16,7 +16,7 @@ import com.example.individualassignment.adapter.CustomPrayerAdapter
 import com.example.individualassignment.model.CustomPrayer
 import com.example.individualassignment.vm.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_navigation.*
+import kotlinx.android.synthetic.main.item_navigation.*
 import java.text.SimpleDateFormat
 import java.util.*
 
