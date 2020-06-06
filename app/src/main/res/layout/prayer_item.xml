@@ -7,6 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -14,11 +15,13 @@
             android:id="@+id/cvCustomPrayerItem"
             android:layout_width="403dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:background="@color/colorPrimaryDark">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:background="@color/colorPrimaryDark"
                 android:orientation="horizontal"
                 android:paddingTop="10dp">
 
@@ -29,8 +32,9 @@
                     android:layout_weight="1"
                     android:paddingLeft="30dp"
                     android:paddingRight="15dp"
-                    android:text="Prayername"
-                    android:textSize="24sp" />
+                    android:textColor="@color/colorPrimaryWhite"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtItemPrayeTime"
@@ -39,7 +43,7 @@
                     android:layout_weight="1"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
-                    android:text="PrayerTime"
+                    android:textColor="@color/colorPrimaryWhite"
                     android:textSize="24sp" />
             </LinearLayout>
 
