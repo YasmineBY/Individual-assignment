@@ -42,12 +42,15 @@ class PrayerTimesActivity : AppCompatActivity() {
 
     private fun preparePrayerDataListView(prayers: Array<PrayerDetails>): ArrayList<ListViewPrayer> {
         val listViewPrayer: ArrayList<ListViewPrayer> = ArrayList()
-        for(prayer in prayers){
-            listViewPrayer.add(ListViewPrayer(prayer.timings.isha))
-            listViewPrayer.add(ListViewPrayer(prayer.timings.fajr))
-            listViewPrayer.add(ListViewPrayer(prayer.timings.duhr))
-            listViewPrayer.add(ListViewPrayer(prayer.timings.asr))
-            listViewPrayer.add(ListViewPrayer(prayer.timings.maghrib))
+        val prayerNames: List<String> =  listOf("fajr", "sunrise", "duhr", "asr", "maghrib", "isha")
+        for(prayer in prayers)  {
+            listViewPrayer.add(ListViewPrayer("fajr", prayer.timings.fajr))
+            listViewPrayer.add(ListViewPrayer("sunrise", prayer.timings.sunrise))
+//
+//            listViewPrayer.add(ListViewPrayer(prayer.timings.isha))
+//            listViewPrayer.add(ListViewPrayer(prayer.timings.duhr))
+//            listViewPrayer.add(ListViewPrayer(prayer.timings.asr))
+//            listViewPrayer.add(ListViewPrayer(prayer.timings.maghrib))
         }
         return listViewPrayer
     }
@@ -55,7 +58,7 @@ class PrayerTimesActivity : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.listOfPrayers.observe(this, Observer {
                 prayers ->
-          var temp =  preparePrayerDataListView(prayers)
+            var temp =  preparePrayerDataListView(prayers)
             this@PrayerTimesActivity.listViewPrayers.clear()
             this@PrayerTimesActivity.listViewPrayers.addAll(preparePrayerDataListView(prayers))
             prayerTimesAdapter.notifyDataSetChanged()
@@ -72,7 +75,7 @@ class PrayerTimesActivity : AppCompatActivity() {
 
         observeViewModel()
 
-        recyclerView.addItemDecoration(
+        recyclerView.addItemDecoration  (
             DividerItemDecoration(
                 this@PrayerTimesActivity,
                 DividerItemDecoration.VERTICAL
