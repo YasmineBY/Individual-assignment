@@ -19,6 +19,8 @@ import com.example.individualassignment.adapter.CustomPrayerAdapter
 import com.example.individualassignment.model.CustomPrayer
 import com.example.individualassignment.vm.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_add_custom_prayer.*
+import kotlinx.android.synthetic.main.content_add_custom_prayer.view.*
 import kotlinx.android.synthetic.main.item_navigation.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -172,7 +174,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.addNewCustomPrayer(customPrayer)
         }
         btnAddPrayers.setOnClickListener {
-            showAddProductdialog()
+            showAddNewCustomPrayer()
         }
 
     }
@@ -201,19 +203,42 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun showAddProductdialog() {
+//    private fun showAddNewCustomPrayer() {
+//        val builder = AlertDialog.Builder(this)
+////        builder.setTitle(getString(R.string.add_prayer))
+//        val dialogLayout = layoutInflater.inflate(R.layout.content_add_custom_prayer, null)
+//        val productName = dialogLayout.findViewById<EditText>(R.id.etCustomPrayerName11)
+//
+//        etCustomPrayerName11.setText("hELLO YELLOW")
+////        val productName = dialogLayout.findViewById<EditText>(R.id.txt_product_name)
+////        val amount = dialogLayout.findViewById<EditText>(R.id.txt_amount)
+//
+//        builder.setView(dialogLayout)
+//        builder.setPositiveButton("hellyellow") { _: DialogInterface, _: Int ->
+//            addProduct(productName, amount)
+//        }
+//
+//        builder.show()
+//    }
+
+    private fun showAddNewCustomPrayer() {
         val builder = AlertDialog.Builder(this)
 //        builder.setTitle(getString(R.string.add_prayer))
         val dialogLayout = layoutInflater.inflate(R.layout.content_add_custom_prayer, null)
-//        val productName = dialogLayout.findViewById<EditText>(R.id.txt_product_name)
-//        val amount = dialogLayout.findViewById<EditText>(R.id.txt_amount)
+        val prayerName = dialogLayout.findViewById<EditText>(R.id.etCustomPrayerName)
+        val prayerDate = dialogLayout.findViewById<EditText>(R.id.txtCustomPrayerDate)
 
         builder.setView(dialogLayout)
-//        builder.setPositiveButton(R.string.dialog_ok_btn) { _: DialogInterface, _: Int ->
-//            addProduct(productName, amount)
-//        }
         builder.show()
+
+        dialogLayout.btnCancelCustomPrayer.setOnClickListener   {
+            println(prayerName.text.toString())
+
+        }
     }
+
+
+
 
 
     private fun showEditDialog() {

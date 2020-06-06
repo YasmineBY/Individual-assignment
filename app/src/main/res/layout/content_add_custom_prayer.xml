@@ -25,9 +25,10 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCustomPrayerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="hint" />
+                android:hint="@string/custom_prayer_name" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
@@ -40,6 +41,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/day" />
@@ -50,6 +52,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMonth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/month" />
@@ -60,6 +63,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etYear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/year" />
@@ -76,6 +80,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etStartTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="startTime" />
@@ -86,6 +91,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEndTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="endTime" />
@@ -98,7 +104,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btnCancelCustomPrayer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -108,7 +114,7 @@
                 android:textColorHighlight="@color/colorAccent" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/btnAddCustomPrayer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
