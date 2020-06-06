@@ -102,14 +102,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/cancel" />
+                android:background="@color/colorPrimaryDark"
+                android:text="@string/cancel"
+                android:textColor="@color/colorPrimaryWhite"
+                android:textColorHighlight="@color/colorAccent" />
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/add" />
+                android:background="@color/colorPrimaryLighter"
+                android:text="@string/add"
+                android:textColor="@color/colorPrimaryWhite" />
         </LinearLayout>
 
     </LinearLayout>

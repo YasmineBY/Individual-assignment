@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun onCustomPrayerClick(prayer: CustomPrayer) {
-
+        showEditDialog()
         val prefs = this.getSharedPreferences("CUSTOM_PRAYER", 0)
         val editor = prefs.edit()
 
@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
 
 
 //        var selectedPrayer = prayer
-        val intent = Intent(this@MainActivity, PopupEditCustomPrayerActivity::class.java)
+//        val intent = Intent(this@MainActivity, PopupEditCustomPrayerActivity::class.java)
         val extras: Bundle? = intent.extras
         intent.putExtra(CUSTOM_PRAYER,customPrayer)
 
@@ -215,6 +215,13 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
+
+    private fun showEditDialog() {
+        val builder = AlertDialog.Builder(this)
+        val dialogLayout = layoutInflater.inflate(R.layout.content_edit_custom_prayer, null)
+        builder.setView(dialogLayout)
+        builder.show()
+    }
 
 }
 
