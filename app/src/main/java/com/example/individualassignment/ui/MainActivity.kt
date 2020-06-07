@@ -210,13 +210,17 @@ class MainActivity : AppCompatActivity() {
 
 
     fun updateExistingPrayer(dialogLayout: View, prayerId: Long?): CustomPrayer {
-        var dayStart = dialogLayout.findViewById<EditText>(R.id.etEditDay)
-        var startDay = dayStart.text.toString().toInt()
+        var startDay = dialogLayout.findViewById<EditText>(R.id.etEditDay).text.toString().toInt()
+        var startMonth = dialogLayout.findViewById<EditText>(R.id.etEditMonth).text.toString().toInt() -1 
+        var startYear = dialogLayout.findViewById<EditText>(R.id.etEditYear).text.toString().toInt()
+        var startHour = dialogLayout.findViewById<EditText>(R.id.etEditStartHours).text.toString().toInt()
+        var startMinutes = dialogLayout.findViewById<EditText>(R.id.etEditStartMinutes).text.toString().toInt()
+//        var startDay = dayStart.text.toString().toInt()
 
 
 
         var startDate = Calendar.getInstance()
-        startDate.set(2020, 1, startDay, 11, 1)
+        startDate.set(startYear, startMonth, startDay, startHour, startMinutes)
 
 
         var endDate = Calendar.getInstance()
@@ -235,6 +239,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun prefilllDialog(dialogLayout: View, prayer: CustomPrayer)    {
+        //todo edit the ehader of the edit screen so it says edit prayer
         var receivedStartPrayerDay = prayer.startTime.time
         var receivedEndPrayerDay = prayer.endTime.time
 

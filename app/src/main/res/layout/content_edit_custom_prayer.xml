@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
-            android:text="@string/add_prayer"
+            android:text="@string/edit_custom_prayer"
             android:textColor="@color/colorPrimaryWhite"
             android:textSize="30sp" />
 
@@ -201,7 +201,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryLighter"
-                android:text="@string/add"
+                android:text="@string/update_text"
                 android:textColor="@color/colorPrimaryWhite" />
 
         </LinearLayout>
