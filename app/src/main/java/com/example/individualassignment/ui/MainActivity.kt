@@ -228,8 +228,10 @@ class MainActivity : AppCompatActivity() {
         var endTime = dialogLayout.findViewById<EditText>(R.id.etEndTime)
 
         fun getNewPrayer(): CustomPrayer {
-            var calendar = Calendar.getInstance()
-            var calendarEndTime = Calendar.getInstance()
+            var startOfPrayerDate = Calendar.getInstance()
+            var endOfPrayerDate = Calendar.getInstance()
+
+
             var day: Int = day.text.toString().toInt()
             var month = month.text.toString().toInt()
             var year = year.text.toString().toInt()
@@ -244,18 +246,20 @@ class MainActivity : AppCompatActivity() {
             var newName: String = prayerName.getText().toString()
 
 
-            calendar.set(year, day, month)
-            calendar.set(Calendar.HOUR_OF_DAY, startTime)
-            //todo make a seperate date field to give the End date an actual end date instead of re-using time
-            calendarEndTime.set(year, day, month)
-            calendarEndTime.set(Calendar.HOUR_OF_DAY, endTime)
+            startOfPrayerDate.set(year, day, month)
+            startOfPrayerDate.set(Calendar.HOUR_OF_DAY, startTime)
 
-            var calendarStart = calendar.time
-            var endtime =calendarEndTime.time
+
+            //todo make a seperate date field to give the End date an actual end date instead of re-using time
+            endOfPrayerDate.set(year, day, month)
+            endOfPrayerDate.set(Calendar.HOUR_OF_DAY, endTime)
+
+            var calendarStart = startOfPrayerDate.time
+            var endtime =endOfPrayerDate.time
 
             var newCustomPrayer: CustomPrayer = CustomPrayer(
                 newName,
-                calendar.time,
+                calendarStart,
                 calendarStart,
                 endtime
             )
