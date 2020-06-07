@@ -28,6 +28,7 @@ class CustomPrayerAdapter(
         fun formatDate(receivedDate: Date): String {
 
             var formatDate: SimpleDateFormat? = SimpleDateFormat("hh:mm a\n MM d yyyy ")
+             println(receivedDate.time)
             var formattedDate = formatDate?.format(receivedDate)
 
             return formattedDate.toString()
