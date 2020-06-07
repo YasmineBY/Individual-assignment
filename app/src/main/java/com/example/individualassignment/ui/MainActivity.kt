@@ -141,6 +141,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    //todo maybe uodate this 
     private fun showAddNewCustomPrayer() {
         val builder = AlertDialog.Builder(this)
         val dialogLayout = layoutInflater.inflate(R.layout.content_add_custom_prayer, null)
@@ -166,14 +167,12 @@ class MainActivity : AppCompatActivity() {
 
             var newName: String = prayerName.getText().toString()
 
-            //Retrieve the data for the start of prayer date
             var startDay: Int = day.text.toString().toInt()
             var startMonth = month.text.toString().toInt() -1
             var startYear = year.text.toString().toInt()
             var startingHours = hours.text.toString().toInt()
             var startMinutes = startMinutes.text.toString().toInt()
 
-            //Retrieve the data for the end of prayer date
             var endingDay: Int = endDayText.text.toString().toInt()
             var endingMonth = endMonthText.text.toString().toInt() -1
             var endingYear = endYearText.text.toString().toInt()
@@ -181,13 +180,10 @@ class MainActivity : AppCompatActivity() {
             var endingTimeMinutes = etEndTimeMinutes.text.toString().toInt()
 
             startOfPrayerDate.set(startYear, startMonth, startDay, startingHours, startMinutes )
-//            startOfPrayerDate.set(Calendar.HOUR_OF_DAY, startingHours)
-//            endOfPrayerDate.set(Calendar.MINUTE, startMinutes)
-//            endOfPrayerDate.set(1, 1, 1, 1, 1)
+
 
             endOfPrayerDate.set(endingYear, endingMonth,  endingDay,endingTimeHours,  endingTimeMinutes)
-//            endOfPrayerDate.set(Calendar.HOUR_OF_DAY, endingTimeHours)
-//            endOfPrayerDate.set(Calendar.MINUTE, endingTimeMinutes)
+
 
 
             var newCustomPrayer: CustomPrayer = CustomPrayer(
@@ -210,13 +206,21 @@ class MainActivity : AppCompatActivity() {
 
 
     fun updateExistingPrayer(dialogLayout: View, prayerId: Long?): CustomPrayer {
+        var prayerName = dialogLayout.findViewById<EditText>(R.id.etEditCustomPrayerName).text.toString()
+
+
         var startDay = dialogLayout.findViewById<EditText>(R.id.etEditDay).text.toString().toInt()
-        var startMonth = dialogLayout.findViewById<EditText>(R.id.etEditMonth).text.toString().toInt() -1 
+        var startMonth = dialogLayout.findViewById<EditText>(R.id.etEditMonth).text.toString().toInt() -1
         var startYear = dialogLayout.findViewById<EditText>(R.id.etEditYear).text.toString().toInt()
         var startHour = dialogLayout.findViewById<EditText>(R.id.etEditStartHours).text.toString().toInt()
         var startMinutes = dialogLayout.findViewById<EditText>(R.id.etEditStartMinutes).text.toString().toInt()
 //        var startDay = dayStart.text.toString().toInt()
 
+        var endDay = dialogLayout.findViewById<EditText>(R.id.etEditEndDay).text.toString().toInt()
+        var endMonth = dialogLayout.findViewById<EditText>(R.id.etEditEndMonth).text.toString().toInt() -1
+        var endYear = dialogLayout.findViewById<EditText>(R.id.etEditEndYear).text.toString().toInt()
+        var endHour = dialogLayout.findViewById<EditText>(R.id.etEditEndHours).text.toString().toInt()
+        var endMinutes = dialogLayout.findViewById<EditText>(R.id.etEditEndMinutes).text.toString().toInt()
 
 
         var startDate = Calendar.getInstance()
@@ -224,11 +228,11 @@ class MainActivity : AppCompatActivity() {
 
 
         var endDate = Calendar.getInstance()
-        endDate.set(2020, 1, 20, 11, 1)
+        endDate.set(endYear, endMonth, endDay, endHour, endMinutes)
 
 
         var newPrayer: CustomPrayer =  CustomPrayer(
-            "Name",
+            prayerName,
             startDate.time,
             endDate.time,
             prayerId
@@ -274,8 +278,6 @@ class MainActivity : AppCompatActivity() {
         val dialogLayout = layoutInflater.inflate(R.layout.content_edit_custom_prayer, null)
 
         prefilllDialog(dialogLayout, prayer)
-
-
 
         dialogLayout.btnEditCustomPrayer.setOnClickListener {
             viewModel.updateCustomPrayer(updateExistingPrayer(dialogLayout, prayer.id))
