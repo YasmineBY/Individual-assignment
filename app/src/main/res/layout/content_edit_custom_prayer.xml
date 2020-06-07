@@ -186,7 +186,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnCancelCustomPrayer"
+                android:id="@+id/btnCancelEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -196,7 +196,7 @@
                 android:textColorHighlight="@color/colorAccent" />
 
             <Button
-                android:id="@+id/btnAddCustomPrayer"
+                android:id="@+id/btnEditCustomPrayer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
