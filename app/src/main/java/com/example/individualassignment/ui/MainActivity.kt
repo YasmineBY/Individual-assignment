@@ -121,36 +121,8 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-
-    }
-
 
     fun initNavigation() {
-//        val calendar = Calendar.getInstance()
-//        calendar.set(2020, 1, 1)
-//        calendar.set(Calendar.HOUR_OF_DAY, 22)
-//
-//
-//        var customPrayer: CustomPrayer = CustomPrayer(
-//            "TESTING TIME SETTING22222222222S",
-//            calendar.time,
-//            calendar.time
-//        )
-
 
         btnListRetrievePrayers.setOnClickListener {
             val intent = Intent(this@MainActivity, PrayerTimesActivity::class.java)
@@ -165,47 +137,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun createItemTouchHelper(): ItemTouchHelper {
-
-        val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            //          Callback triggered when a user swiped an item.
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
-                var customPrayerToDelete = prayers[position]
-                viewModel.deleteCustomPrayer(customPrayerToDelete)
-
-            }
-        }
-        return ItemTouchHelper(callback)
-    }
-
-
-//    private fun showAddNewCustomPrayer() {
-//        val builder = AlertDialog.Builder(this)
-////        builder.setTitle(getString(R.string.add_prayer))
-//        val dialogLayout = layoutInflater.inflate(R.layout.content_add_custom_prayer, null)
-//        val productName = dialogLayout.findViewById<EditText>(R.id.etCustomPrayerName11)
-//
-//        etCustomPrayerName11.setText("hELLO YELLOW")
-////        val productName = dialogLayout.findViewById<EditText>(R.id.txt_product_name)
-////        val amount = dialogLayout.findViewById<EditText>(R.id.txt_amount)
-//
-//        builder.setView(dialogLayout)
-//        builder.setPositiveButton("hellyellow") { _: DialogInterface, _: Int ->
-//            addProduct(productName, amount)
-//        }
-//
-//        builder.show()
-//    }
 
     private fun showAddNewCustomPrayer() {
         val builder = AlertDialog.Builder(this)
@@ -265,22 +196,8 @@ class MainActivity : AppCompatActivity() {
 
 
         dialogLayout.btnCancelCustomPrayer.setOnClickListener {
-//            var newCustomPrayer = createNewPrayer(getNewPrayer())
-            println("ADDED A NEW THING")
             viewModel.addNewCustomPrayer(getNewPrayer())
         }
-    }
-
-    fun createNewPrayer(newName: String): CustomPrayer {
-        var calendar = Calendar.getInstance()
-
-        var newCustomPrayer: CustomPrayer = CustomPrayer(
-            newName,
-            calendar.time,
-            calendar.time
-        )
-        return newCustomPrayer
-
     }
 
 
@@ -289,6 +206,47 @@ class MainActivity : AppCompatActivity() {
         val dialogLayout = layoutInflater.inflate(R.layout.content_edit_custom_prayer, null)
         builder.setView(dialogLayout)
         builder.show()
+    }
+
+
+    private fun createItemTouchHelper(): ItemTouchHelper {
+
+        val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            //          Callback triggered when a user swiped an item.
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                var customPrayerToDelete = prayers[position]
+                viewModel.deleteCustomPrayer(customPrayerToDelete)
+
+            }
+        }
+        return ItemTouchHelper(callback)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        return when (item.itemId) {
+            R.id.action_settings -> true
+            else -> super.onOptionsItemSelected(item)
+        }
+
     }
 
 }
