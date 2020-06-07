@@ -20,6 +20,7 @@ import com.example.individualassignment.vm.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_add_custom_prayer.view.*
 import kotlinx.android.synthetic.main.item_navigation.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun onCustomPrayerClick(prayer: CustomPrayer) {
-        showEditDialog()
+        showEditDialog(prayer)
         val prefs = this.getSharedPreferences("CUSTOM_PRAYER", 0)
         val editor = prefs.edit()
 
@@ -202,14 +203,37 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun formatDate(receivedDate: Date): String {
 
-    private fun showEditDialog() {
+        var formatDate: SimpleDateFormat? = SimpleDateFormat("hh:mm a\n MMM d yyyy ")
+        var formattedDate = formatDate?.format(receivedDate)
+
+        return formattedDate.toString()
+    }
+
+    private fun showEditDialog(prayer: CustomPrayer) {
         val builder = AlertDialog.Builder(this)
         val dialogLayout = layoutInflater.inflate(R.layout.content_edit_custom_prayer, null)
 
-        var editPrayer = dialogLayout.findViewById<EditText>(R.id.etEditCustomPrayerName)
+        var receivedStartPrayerDay = prayer.startTime.time
 
-        editPrayer.setText("hello yellow y'all")
+        var dayFormat: SimpleDateFormat? = SimpleDateFormat("dd")
+        var monthFormat: SimpleDateFormat? = SimpleDateFormat("MM")
+        var yearFormat: SimpleDateFormat? = SimpleDateFormat("yyyy")
+        var formattedDate = dayFormat?.format(receivedStartPrayerDay)
+        println(formattedDate)
+
+
+        var editPrayerName = dialogLayout.findViewById<EditText>(R.id.etEditCustomPrayerName).setText(prayer.prayerName.toString())
+        var editStartDay = dialogLayout.findViewById<EditText>(R.id.etEditDay).setText(dayFormat?.format(receivedStartPrayerDay))
+
+
+        var editStartMonth = dialogLayout.findViewById<EditText>(R.id.etEditCustomPrayerName).setText(prayer.prayerName.toString())
+        var editStartYear = dialogLayout.findViewById<EditText>(R.id.etEditCustomPrayerName).setText(prayer.prayerName.toString())
+        var editStartHours = dialogLayout.findViewById<EditText>(R.id.etEditCustomPrayerName).setText(prayer.prayerName.toString())
+        var editStartMinutes = dialogLayout.findViewById<EditText>(R.id.etEditCustomPrayerName).setText(prayer.prayerName.toString())
+
+//        editPrayerName.setText(prayer.prayerName.toString())
 
         builder.setView(dialogLayout)
         builder.show()
