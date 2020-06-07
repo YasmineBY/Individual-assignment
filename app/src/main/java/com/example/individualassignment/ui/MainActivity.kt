@@ -227,7 +227,7 @@ class MainActivity : AppCompatActivity() {
         var startTime = dialogLayout.findViewById<EditText>(R.id.etStartTime)
         var endTime = dialogLayout.findViewById<EditText>(R.id.etEndTime)
 
-        fun getNewPrayer(): String {
+        fun getNewPrayer(): CustomPrayer {
             var calendar = Calendar.getInstance()
             var day: Int = day.text.toString().toInt()
             var month = month.text.toString().toInt()
@@ -236,35 +236,34 @@ class MainActivity : AppCompatActivity() {
             var endTime =  endTime.text.toString().toInt()
 
 
-//              calendar.set(year, day, month)
+//             calendar.set(year, day, month)
 //             var calendarStart =   calendar.set(Calendar.HOUR_OF_DAY, startTime)
 //             var calendarEnd =   calendar.set(Calendar.HOUR_OF_DAY, endTime)
 
             var newName: String = prayerName.getText().toString()
 
 
-//            calendar.set(year, day, month)
-//            calendar.set(Calendar.HOUR_OF_DAY, startTime)
-//            var calendarStart = calendar.time
-//            var calendarEnd = calendar.time
+            calendar.set(year, day, month)
+            calendar.set(Calendar.HOUR_OF_DAY, startTime)
+            var calendarStart = calendar.time
 
             var newCustomPrayer: CustomPrayer = CustomPrayer(
                 newName,
                 calendar.time,
-                calendar.time,
+                calendarStart,
                 calendar.time
             )
 
 
-            return newName
+            return newCustomPrayer
         }
 
 
 
         dialogLayout.btnCancelCustomPrayer.setOnClickListener {
-            var newName: String = prayerName.getText().toString()
-            var newCustomPrayer = createNewPrayer(getNewPrayer())
-            viewModel.addNewCustomPrayer(newCustomPrayer)
+//            var newCustomPrayer = createNewPrayer(getNewPrayer())
+            println("ADDED A NEW THING")
+            viewModel.addNewCustomPrayer(getNewPrayer())
         }
     }
 

@@ -24,8 +24,8 @@ class CustomPrayerAdapter( private val customPrayers: List<CustomPrayer> , priva
         fun bind(customPrayer: CustomPrayer) {
             itemView.txtCustomPrayerName.text = customPrayer.prayerName
             itemView.txtCustomPrayerTime.text = customPrayer.startTime.toString()
-//            itemView.txtCustomPrayerEndTime.text = customPrayer.endTime.toString()
-//            itemView.txtCustomPrayerDate.text = customPrayer.prayerDate.toString()
+            itemView.txtCustomPrayerDate.text = customPrayer.prayerDate.toString()
+            itemView.txtCustomPrayerEndTime.text = customPrayer.endTime.toString()
 
         }
     }
