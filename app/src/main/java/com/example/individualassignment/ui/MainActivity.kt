@@ -217,7 +217,8 @@ class MainActivity : AppCompatActivity() {
         var day = dialogLayout.findViewById<EditText>(R.id.etDay)
         var month = dialogLayout.findViewById<EditText>(R.id.etMonth)
         var year = dialogLayout.findViewById<EditText>(R.id.etYear)
-        var startTime = dialogLayout.findViewById<EditText>(R.id.etStartHours)
+        var hours = dialogLayout.findViewById<EditText>(R.id.etStartHours)
+        var startMinutes = dialogLayout.findViewById<EditText>(R.id.etStartMinutes)
 
         var endDayText = dialogLayout.findViewById<EditText>(R.id.etDay)
         var endMonthText = dialogLayout.findViewById<EditText>(R.id.etMonth)
@@ -234,17 +235,18 @@ class MainActivity : AppCompatActivity() {
             var startDay: Int = day.text.toString().toInt()
             var startMonth = month.text.toString().toInt()
             var startYear = year.text.toString().toInt()
-            var startingTime = startTime.text.toString().toInt()
+            var startingHours = hours.text.toString().toInt()
+            var startMinutes = startMinutes.text.toString().toInt()
 
             var endingDay: Int = endDayText.text.toString().toInt()
             var endingMonth = endMonthText.text.toString().toInt()
             var endingYear = endYearText.text.toString().toInt()
             var endingTimeHours = endTimeText.text.toString().toInt()
-            var endingTimeMinutes = endTimeText.text.toString().toInt()
+            var endingTimeMinutes = etEndTimeMinutes.text.toString().toInt()
 
             startOfPrayerDate.set(startYear, startDay, startMonth)
-            startOfPrayerDate.set(Calendar.HOUR_OF_DAY, startingTime)
-//            startOfPrayerDate.set(Calendar.HOUR_OF_DAY, startingTime)
+            startOfPrayerDate.set(Calendar.HOUR_OF_DAY, startingHours)
+            endOfPrayerDate.set(Calendar.MINUTE, startMinutes)
 
             endOfPrayerDate.set(endingYear, endingDay, endingMonth)
             endOfPrayerDate.set(Calendar.HOUR_OF_DAY, endingTimeHours)
