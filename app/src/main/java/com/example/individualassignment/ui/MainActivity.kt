@@ -221,19 +221,26 @@ class MainActivity : AppCompatActivity() {
         var endDayText = dialogLayout.findViewById<EditText>(R.id.etEditEndDay).getText().toString().toInt()
         var endMonthText = dialogLayout.findViewById<EditText>(R.id.etEditEndMonth).getText().toString().toInt()
         var endYearText = dialogLayout.findViewById<EditText>(R.id.etEditEndYear).getText().toString().toInt()
-        var endTimeText = dialogLayout.findViewById<EditText>(R.id.etEditEndHours).getText().toString().toInt()
+        var endHoursText = dialogLayout.findViewById<EditText>(R.id.etEditEndHours).getText().toString().toInt()
         var etEndTimeMinutes = dialogLayout.findViewById<EditText>(R.id.etEditEndMinutes).getText().toString().toInt()
 
         var startOfPrayerDate = Calendar.getInstance()
+        var endOfPrayerDate = Calendar.getInstance()
 
-        startOfPrayerDate.set(year, day, month)
+        //TODO CHANGE THIS AT ALL CALENDAR CREATIONS
+        startOfPrayerDate.set(year, month, day)
         startOfPrayerDate.set(Calendar.HOUR_OF_DAY, hours)
-//        endOfPrayerDate.set(Calendar.MINUTE, startMinutes)
+        startOfPrayerDate.set(Calendar.MINUTE, startMinutes)
+
+
+        endOfPrayerDate.set(endYearText, endDayText, endMonthText)
+        endOfPrayerDate.set(Calendar.HOUR_OF_DAY, endHoursText)
+        endOfPrayerDate.set(Calendar.MINUTE, etEndTimeMinutes)
 
         var newCustomPrayer: CustomPrayer = CustomPrayer(
             editedPrayerName,
             startOfPrayerDate.time,
-            startOfPrayerDate.time,
+            endOfPrayerDate.time,
             prayerId
         )
 //
@@ -276,51 +283,6 @@ class MainActivity : AppCompatActivity() {
 
         prefilllDialog(dialogLayout, prayer)
 
-
-
-
-
-
-
-
-
-//        fun getEditedPrayer(): CustomPrayer {
-//            var startOfPrayerDate = Calendar.getInstance()
-//            var endOfPrayerDate = Calendar.getInstance()
-//
-//            var newName: String =  dialogLayout.findViewById<EditText>(R.id.etEditCustomPrayerName).getText().toString()
-//
-//            //Retrieve the data for the start of prayer date
-//            var startDay: Int = dialogLayout.findViewById<EditText>(R.id.etEditDay).getText().toString().toInt()
-//            var startMonth = month.text.toString().toInt()
-//            var startYear = year.text.toString().toInt()
-//            var startingHours = hours.text.toString().toInt()
-//            var startMinutes = startMinutes.text.toString().toInt()
-//
-//            //Retrieve the data for the end of prayer date
-//            var endingDay: Int = endDayText.text.toString().toInt()
-//            var endingMonth = endMonthText.text.toString().toInt()
-//            var endingYear = endYearText.text.toString().toInt()
-//            var endingTimeHours = endTimeText.text.toString().toInt()
-//            var endingTimeMinutes = etEndTimeMinutes.text.toString().toInt()
-//
-//            startOfPrayerDate.set(startYear, startDay, startMonth)
-//            startOfPrayerDate.set(Calendar.HOUR_OF_DAY, startingHours)
-//            endOfPrayerDate.set(Calendar.MINUTE, startMinutes)
-//
-//            endOfPrayerDate.set(endingYear, endingDay, endingMonth)
-//            endOfPrayerDate.set(Calendar.HOUR_OF_DAY, endingTimeHours)
-//            endOfPrayerDate.set(Calendar.MINUTE, endingTimeMinutes)
-//
-//
-//            var newCustomPrayer: CustomPrayer = CustomPrayer(
-//                newName,
-//                startOfPrayerDate.time,
-//                endOfPrayerDate.time
-//            )
-//
-//            return newCustomPrayer
-//        }
 
 
         dialogLayout.btnEditCustomPrayer.setOnClickListener {
