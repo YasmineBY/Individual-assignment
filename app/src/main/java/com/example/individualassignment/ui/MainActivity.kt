@@ -229,6 +229,7 @@ class MainActivity : AppCompatActivity() {
 
         fun getNewPrayer(): CustomPrayer {
             var calendar = Calendar.getInstance()
+            var calendarEndTime = Calendar.getInstance()
             var day: Int = day.text.toString().toInt()
             var month = month.text.toString().toInt()
             var year = year.text.toString().toInt()
@@ -245,13 +246,18 @@ class MainActivity : AppCompatActivity() {
 
             calendar.set(year, day, month)
             calendar.set(Calendar.HOUR_OF_DAY, startTime)
+            //todo make a seperate date field to give the End date an actual end date instead of re-using time
+            calendarEndTime.set(year, day, month)
+            calendarEndTime.set(Calendar.HOUR_OF_DAY, endTime)
+
             var calendarStart = calendar.time
+            var endtime =calendarEndTime.time
 
             var newCustomPrayer: CustomPrayer = CustomPrayer(
                 newName,
                 calendar.time,
                 calendarStart,
-                calendar.time
+                endtime
             )
 
 
