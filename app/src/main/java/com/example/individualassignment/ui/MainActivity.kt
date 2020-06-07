@@ -20,7 +20,6 @@ import com.example.individualassignment.vm.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_add_custom_prayer.view.*
 import kotlinx.android.synthetic.main.item_navigation.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -80,7 +79,6 @@ class MainActivity : AppCompatActivity() {
         val editor = prefs.edit()
 
         editor.putString("PRAYER_NAME", prayer.prayerName)
-        editor.putString("PRAYER_DATE", prayer.prayerDate.toString())
         editor.putString("START_TIME", prayer.startTime.toString())
         editor.putString("END_TIME", prayer.endTime.toString())
         editor.putString("ID", prayer.id.toString())
@@ -96,7 +94,6 @@ class MainActivity : AppCompatActivity() {
 //            var id: Long? = null
         var customPrayer = CustomPrayer(
             prayer.prayerName,
-            prayer.prayerDate,
             prayer.endTime,
             prayer.startTime,
             prayer.id
@@ -143,21 +140,16 @@ class MainActivity : AppCompatActivity() {
 
 
     fun initNavigation() {
-        val calendar = Calendar.getInstance()
-        calendar.set(2020, 1, 1)
-        calendar.set(Calendar.HOUR_OF_DAY, 22)
-
-
-        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault())
-        println(sdf)
-        println("HELLO WORLD")
-
-        var customPrayer: CustomPrayer = CustomPrayer(
-            "TESTING TIME SETTING22222222222S",
-            calendar.time,
-            calendar.time,
-            calendar.time
-        )
+//        val calendar = Calendar.getInstance()
+//        calendar.set(2020, 1, 1)
+//        calendar.set(Calendar.HOUR_OF_DAY, 22)
+//
+//
+//        var customPrayer: CustomPrayer = CustomPrayer(
+//            "TESTING TIME SETTING22222222222S",
+//            calendar.time,
+//            calendar.time
+//        )
 
 
         btnListRetrievePrayers.setOnClickListener {
@@ -165,7 +157,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         btnHome.setOnClickListener {
-            viewModel.addNewCustomPrayer(customPrayer)
+//            viewModel.addNewCustomPrayer(customPrayer)
         }
         btnAddPrayers.setOnClickListener {
             showAddNewCustomPrayer()
@@ -221,49 +213,49 @@ class MainActivity : AppCompatActivity() {
         builder.setView(dialogLayout)
         builder.show()
         var prayerName = dialogLayout.findViewById<EditText>(R.id.etCustomPrayerName)
+
         var day = dialogLayout.findViewById<EditText>(R.id.etDay)
         var month = dialogLayout.findViewById<EditText>(R.id.etMonth)
         var year = dialogLayout.findViewById<EditText>(R.id.etYear)
-        var startTime = dialogLayout.findViewById<EditText>(R.id.etStartTime)
-        var endTime = dialogLayout.findViewById<EditText>(R.id.etEndTime)
+        var startTime = dialogLayout.findViewById<EditText>(R.id.etStartHours)
+
+        var endDayText = dialogLayout.findViewById<EditText>(R.id.etDay)
+        var endMonthText = dialogLayout.findViewById<EditText>(R.id.etMonth)
+        var endYearText = dialogLayout.findViewById<EditText>(R.id.etYear)
+        var endTimeText = dialogLayout.findViewById<EditText>(R.id.etEndHours)
+        var etEndTimeMinutes = dialogLayout.findViewById<EditText>(R.id.etEndMinutes)
 
         fun getNewPrayer(): CustomPrayer {
             var startOfPrayerDate = Calendar.getInstance()
             var endOfPrayerDate = Calendar.getInstance()
 
-
-            var day: Int = day.text.toString().toInt()
-            var month = month.text.toString().toInt()
-            var year = year.text.toString().toInt()
-            var startTime = startTime.text.toString().toInt()
-            var endTime =  endTime.text.toString().toInt()
-
-
-//             calendar.set(year, day, month)
-//             var calendarStart =   calendar.set(Calendar.HOUR_OF_DAY, startTime)
-//             var calendarEnd =   calendar.set(Calendar.HOUR_OF_DAY, endTime)
-
             var newName: String = prayerName.getText().toString()
 
+            var startDay: Int = day.text.toString().toInt()
+            var startMonth = month.text.toString().toInt()
+            var startYear = year.text.toString().toInt()
+            var startingTime = startTime.text.toString().toInt()
 
-            startOfPrayerDate.set(year, day, month)
-            startOfPrayerDate.set(Calendar.HOUR_OF_DAY, startTime)
+            var endingDay: Int = endDayText.text.toString().toInt()
+            var endingMonth = endMonthText.text.toString().toInt()
+            var endingYear = endYearText.text.toString().toInt()
+            var endingTimeHours = endTimeText.text.toString().toInt()
+            var endingTimeMinutes = endTimeText.text.toString().toInt()
 
+            startOfPrayerDate.set(startYear, startDay, startMonth)
+            startOfPrayerDate.set(Calendar.HOUR_OF_DAY, startingTime)
+//            startOfPrayerDate.set(Calendar.HOUR_OF_DAY, startingTime)
 
-            //todo make a seperate date field to give the End date an actual end date instead of re-using time
-            endOfPrayerDate.set(year, day, month)
-            endOfPrayerDate.set(Calendar.HOUR_OF_DAY, endTime)
+            endOfPrayerDate.set(endingYear, endingDay, endingMonth)
+            endOfPrayerDate.set(Calendar.HOUR_OF_DAY, endingTimeHours)
+            endOfPrayerDate.set(Calendar.MINUTE, endingTimeMinutes)
 
-            var calendarStart = startOfPrayerDate.time
-            var endtime =endOfPrayerDate.time
 
             var newCustomPrayer: CustomPrayer = CustomPrayer(
                 newName,
-                calendarStart,
-                calendarStart,
-                endtime
+                startOfPrayerDate.time,
+                endOfPrayerDate.time
             )
-
 
             return newCustomPrayer
         }
@@ -282,7 +274,6 @@ class MainActivity : AppCompatActivity() {
 
         var newCustomPrayer: CustomPrayer = CustomPrayer(
             newName,
-            calendar.time,
             calendar.time,
             calendar.time
         )

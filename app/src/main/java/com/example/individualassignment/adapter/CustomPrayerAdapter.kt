@@ -8,10 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.individualassignment.R
 import com.example.individualassignment.model.CustomPrayer
 import kotlinx.android.synthetic.main.custom_prayer_item.view.*
-import kotlinx.android.synthetic.main.prayer_item.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-class CustomPrayerAdapter( private val customPrayers: List<CustomPrayer> , private val onClick: (CustomPrayer) -> Unit):
+class CustomPrayerAdapter(
+    private val customPrayers: List<CustomPrayer>,
+    private val onClick: (CustomPrayer) -> Unit
+) :
 
     RecyclerView.Adapter<CustomPrayerAdapter.ViewHolder>() {
     private lateinit var context: Context
@@ -21,12 +25,19 @@ class CustomPrayerAdapter( private val customPrayers: List<CustomPrayer> , priva
             itemView.setOnClickListener { onClick(customPrayers[adapterPosition]) }
         }
 
+        fun formatDate(receivedDate: Date): String {
+
+            var formatDate: SimpleDateFormat? = SimpleDateFormat("hh:mm\nyyyy-MM-dd ")
+            var formattedDate = formatDate?.format(receivedDate)
+
+            return formattedDate.toString()
+        }
+
+
         fun bind(customPrayer: CustomPrayer) {
             itemView.txtCustomPrayerName.text = customPrayer.prayerName
-            itemView.txtCustomPrayerTime.text = customPrayer.startTime.toString()
-            itemView.txtCustomPrayerDate.text = customPrayer.prayerDate.toString()
-            itemView.txtCustomPrayerEndTime.text = customPrayer.endTime.toString()
-
+            itemView.txtCustomPrayerStartDate.text = "Starts at:\n" + formatDate(customPrayer.startTime)
+            itemView.txtCustomPrayerEndTime.text = "Ends at:\n" + formatDate(customPrayer.endTime)
         }
     }
 

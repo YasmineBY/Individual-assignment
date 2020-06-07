@@ -9,7 +9,7 @@ import com.example.individualassignment.model.CustomPrayer
 
 interface CustomPrayerDao {
 
-    @Query("SELECT * FROM custom_Prayer_table ORDER BY prayerDate DESC")
+    @Query("SELECT * FROM custom_Prayer_table ORDER BY startTime DESC")
     fun getAllCustomPrayers(): LiveData<List<CustomPrayer>>
 
     @Insert

@@ -11,7 +11,6 @@ import java.util.*
 @Entity(tableName = "custom_Prayer_table")
 data class CustomPrayer (
     var prayerName: String,
-    var prayerDate: Date,
     var startTime: Date,
     var endTime: Date,
     @PrimaryKey(autoGenerate = true)
