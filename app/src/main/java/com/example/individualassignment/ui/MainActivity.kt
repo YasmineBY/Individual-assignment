@@ -163,12 +163,14 @@ class MainActivity : AppCompatActivity() {
 
             var newName: String = prayerName.getText().toString()
 
+            //Retrieve the data for the start of prayer date
             var startDay: Int = day.text.toString().toInt()
             var startMonth = month.text.toString().toInt()
             var startYear = year.text.toString().toInt()
             var startingHours = hours.text.toString().toInt()
             var startMinutes = startMinutes.text.toString().toInt()
 
+            //Retrieve the data for the end of prayer date
             var endingDay: Int = endDayText.text.toString().toInt()
             var endingMonth = endMonthText.text.toString().toInt()
             var endingYear = endYearText.text.toString().toInt()
@@ -204,6 +206,11 @@ class MainActivity : AppCompatActivity() {
     private fun showEditDialog() {
         val builder = AlertDialog.Builder(this)
         val dialogLayout = layoutInflater.inflate(R.layout.content_edit_custom_prayer, null)
+
+        var editPrayer = dialogLayout.findViewById<EditText>(R.id.etEditCustomPrayerName)
+
+        editPrayer.setText("hello yellow y'all")
+
         builder.setView(dialogLayout)
         builder.show()
     }

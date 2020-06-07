@@ -37,4 +37,13 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
             }
         }
     }
+
+
+    fun updateCustomPrayer(customPrayer: CustomPrayer) {
+        mainScope.launch {
+            withContext(Dispatchers.IO) {
+                customPrayerRepository.updatePrayer(customPrayer)
+            }
+        }
+    }
 }
