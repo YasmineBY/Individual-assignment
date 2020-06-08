@@ -36,6 +36,11 @@ class PrayerTimesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_retrieved_prayers)
         initViews()
+        val prefs = this.getSharedPreferences(USER_LOCATION, 0)
+        var prefCountry = prefs.getString("COUNTRY", "")
+        var prefCity = prefs.getString("CITY", "")
+
+        txtCurrentLocation.text = "Current location: ${prefCountry}, ${prefCity}"
     }
 
 
@@ -109,15 +114,15 @@ class PrayerTimesActivity : AppCompatActivity() {
         var newCity = etRetrievedPrayerCity.text.toString()
 
         val prefs = this.getSharedPreferences(USER_LOCATION, 0)
-        var prefCountry = prefs.getString("COUNTRY", "").toString()
-        var prefCity = prefs.getString("CITY", "").toString()
+        var prefCountry = prefs.getString("COUNTRY", "")
+        var prefCity = prefs.getString("CITY", "")
 
         txtCurrentLocation.text = "Current location: ${prefCountry}, ${prefCity}"
 
         if (!checkFields()) {
             updateSharedPreferences(newCountry, newCity)
             txtCurrentLocation.text = "Current location: ${newCountry}, ${newCity}"
-            viewModel.getPrayerTimes(prefCountry, prefCity, currentMonth, currentYear)
+            viewModel.getPrayerTimes(prefCountry!!, prefCity!!, currentMonth, currentYear)
         }
     }
 
@@ -130,7 +135,7 @@ class PrayerTimesActivity : AppCompatActivity() {
         editor.putString("COUNTRY", country)
         editor.putString("CITY", city)
 
-        editor.commit()
+        editor.apply()
     }
 
 

@@ -55,17 +55,15 @@ class MainActivity : AppCompatActivity() {
     fun createSharedPreferences() {
         val prefs = this.getSharedPreferences(USER_LOCATION, 0)
         val editor = prefs.edit()
-        editor.putString("COUNTRY", "")
-        editor.putString("CITY", "")
 
         if (!checkPreferenceValue(prefs.getString("COUNTRY", ""))) {
             editor.putString("COUNTRY", "Netherlands")
         }
         if (!checkPreferenceValue(prefs.getString("CITY", ""))) {
-            editor.putString("CITY", "Hoorn")
+            editor.putString("CITY", "Amsterdam")
         }
 
-        editor.commit()
+        editor.apply()
     }
 
     private fun initalizeRecyclerView() {
