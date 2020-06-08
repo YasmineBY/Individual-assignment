@@ -43,8 +43,6 @@ class CustomPrayerAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-//        context = parent.context
-
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.custom_prayer_item, parent, false)
         )

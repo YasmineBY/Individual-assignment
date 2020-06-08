@@ -43,7 +43,7 @@ class PrayerTimesActivity : AppCompatActivity() {
     }
 
 
-    
+
     //todo look at month in all calendar functions
     fun getPrayerTimesOfToday() {
         var currentDate = Calendar.getInstance()
