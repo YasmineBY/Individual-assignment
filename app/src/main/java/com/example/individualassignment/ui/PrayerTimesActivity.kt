@@ -22,6 +22,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 const val USER_LOCATION = "user_location"
+
 //todo remove all PrintLn
 class PrayerTimesActivity : AppCompatActivity() {
 
@@ -36,11 +37,6 @@ class PrayerTimesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_retrieved_prayers)
         initViews()
-        val prefs = this.getSharedPreferences(USER_LOCATION, 0)
-        var prefCountry = prefs.getString("COUNTRY", "")
-        var prefCity = prefs.getString("CITY", "")
-
-        txtCurrentLocation.text = "Current location: ${prefCountry}, ${prefCity}"
     }
 
 
@@ -48,7 +44,6 @@ class PrayerTimesActivity : AppCompatActivity() {
         iconLoading.visibility = View.VISIBLE
         initalizeRecyclerView()
         initNavigation()
-        retrievePrayersBasedOnLocation()
         getDefaultLocationPrayers()
         btnSearchPrayers.setOnClickListener {
             retrievePrayersBasedOnLocation()
@@ -90,17 +85,15 @@ class PrayerTimesActivity : AppCompatActivity() {
 
     fun getDefaultLocationPrayers() {
         var currentDate = Calendar.getInstance()
-        val currentMonth: Int = currentDate.get(Calendar.MONTH).toInt() + 1
-        val currentYear: Int = currentDate.get(Calendar.YEAR).toInt()
+        val currentMonth: Int = currentDate.get(Calendar.MONTH) + 1
+        val currentYear: Int = currentDate.get(Calendar.YEAR)
 
         val prefs = this.getSharedPreferences(USER_LOCATION, 0)
         var prefCountry = prefs.getString("COUNTRY", "").toString()
         var prefCity = prefs.getString("CITY", "").toString()
 
-
         viewModel.getPrayerTimes(prefCountry, prefCity, currentMonth, currentYear)
     }
-
 
 
     //todo look at month in all calendar functions
@@ -115,8 +108,8 @@ class PrayerTimesActivity : AppCompatActivity() {
         val prefs = this.getSharedPreferences(USER_LOCATION, 0)
         var prefCountry = prefs.getString("COUNTRY", "")
         var prefCity = prefs.getString("CITY", "")
-        var currentlocationText =  "Current location: ${prefCountry}, ${prefCity}"
-        var updatedLocationText =  "Current location: ${newCountry}, ${newCity}"
+        var currentlocationText = "Current location: ${prefCountry}, ${prefCity}"
+        var updatedLocationText = "Current location: ${newCountry}, ${newCity}"
         txtCurrentLocation.text = currentlocationText
 
         if (!checkFields()) {
@@ -125,7 +118,6 @@ class PrayerTimesActivity : AppCompatActivity() {
             viewModel.getPrayerTimes(prefCountry!!, prefCity!!, currentMonth, currentYear)
         }
     }
-
 
 
     fun updateSharedPreferences(country: String, city: String) {
@@ -137,8 +129,6 @@ class PrayerTimesActivity : AppCompatActivity() {
 
         editor.apply()
     }
-
-
 
 
     private fun preparePrayerDataListView(prayers: Array<PrayerDetails>): ArrayList<ListViewPrayer> {
