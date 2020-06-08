@@ -22,7 +22,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 const val USER_LOCATION = "user_location"
-
+//todo remove all PrintLn
 class PrayerTimesActivity : AppCompatActivity() {
 
     private lateinit var listViewPrayers: ArrayList<ListViewPrayer>
@@ -84,7 +84,6 @@ class PrayerTimesActivity : AppCompatActivity() {
         if (validationCheck) {
             Toast.makeText(this, missingFields, Toast.LENGTH_SHORT).show();
         }
-        println(validationCheck)
         return validationCheck
 
     }
@@ -116,12 +115,13 @@ class PrayerTimesActivity : AppCompatActivity() {
         val prefs = this.getSharedPreferences(USER_LOCATION, 0)
         var prefCountry = prefs.getString("COUNTRY", "")
         var prefCity = prefs.getString("CITY", "")
-
-        txtCurrentLocation.text = "Current location: ${prefCountry}, ${prefCity}"
+        var currentlocationText =  "Current location: ${prefCountry}, ${prefCity}"
+        var updatedLocationText =  "Current location: ${newCountry}, ${newCity}"
+        txtCurrentLocation.text = currentlocationText
 
         if (!checkFields()) {
             updateSharedPreferences(newCountry, newCity)
-            txtCurrentLocation.text = "Current location: ${newCountry}, ${newCity}"
+            txtCurrentLocation.text = updatedLocationText
             viewModel.getPrayerTimes(prefCountry!!, prefCity!!, currentMonth, currentYear)
         }
     }
@@ -142,9 +142,6 @@ class PrayerTimesActivity : AppCompatActivity() {
 
 
     private fun preparePrayerDataListView(prayers: Array<PrayerDetails>): ArrayList<ListViewPrayer> {
-        //to-do
-        //Make API call: This month, this year. : ListOfPrayers[Today] only
-
         var currentDate = Calendar.getInstance()
         var dayOfMonth: Int = currentDate.get(Calendar.DAY_OF_MONTH)
         var prayersOfToday = prayers[dayOfMonth]
@@ -156,8 +153,6 @@ class PrayerTimesActivity : AppCompatActivity() {
         listViewPrayer.add(ListViewPrayer("asr", prayersOfToday.timings.asr))
         listViewPrayer.add(ListViewPrayer("maghrib", prayersOfToday.timings.maghrib))
         listViewPrayer.add(ListViewPrayer("isha", prayersOfToday.timings.isha))
-
-
 
 
         return listViewPrayer
