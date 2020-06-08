@@ -10,9 +10,6 @@ import kotlinx.android.synthetic.main.prayer_item.view.*
 
 class PrayerTimesAdapter (private val prayers: List<ListViewPrayer>) : RecyclerView.Adapter<PrayerTimesAdapter.ViewHolder>() {
 
-
-
-
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(prayer: ListViewPrayer) {
             itemView.txtItemPrayerName.text = prayer.prayername

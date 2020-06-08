@@ -23,7 +23,6 @@ import kotlin.collections.ArrayList
 
 const val USER_LOCATION = "user_location"
 
-//todo remove all PrintLn
 class PrayerTimesActivity : AppCompatActivity() {
 
     private lateinit var listViewPrayers: ArrayList<ListViewPrayer>
@@ -92,12 +91,14 @@ class PrayerTimesActivity : AppCompatActivity() {
         var prefCountry = prefs.getString("COUNTRY", "").toString()
         var prefCity = prefs.getString("CITY", "").toString()
 
+        var currentlocationText = "Current location: ${prefCountry}, ${prefCity}"
+        txtCurrentLocation.text = currentlocationText
+
         viewModel.getPrayerTimes(prefCountry, prefCity, currentMonth, currentYear)
     }
 
 
-    //todo look at month in all calendar functions
-    //todo implement shared preferences manager for the lcation
+
     fun retrievePrayersBasedOnLocation() {
         var currentDate = Calendar.getInstance()
         val currentMonth: Int = currentDate.get(Calendar.MONTH) + 1
@@ -123,10 +124,8 @@ class PrayerTimesActivity : AppCompatActivity() {
     fun updateSharedPreferences(country: String, city: String) {
         val prefs = this.getSharedPreferences(USER_LOCATION, 0)
         val editor = prefs.edit()
-
         editor.putString("COUNTRY", country)
         editor.putString("CITY", city)
-
         editor.apply()
     }
 

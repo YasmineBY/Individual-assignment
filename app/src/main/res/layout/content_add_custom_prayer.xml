@@ -35,7 +35,7 @@
             android:id="@+id/txtPrayerStartsAt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Starts at"
+            android:text="@string/starts_at"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -91,7 +91,7 @@
                     android:id="@+id/etStartHours"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="hours" />
+                    android:hint="@string/hours" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -102,7 +102,7 @@
                     android:id="@+id/etStartMinutes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="minutes" />
+                    android:hint="@string/minutes" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -110,7 +110,7 @@
             android:id="@+id/txtPrayerEndsAt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ends at"
+            android:text="@string/ends_at"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -166,7 +166,7 @@
                     android:id="@+id/etEndHours"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="hours" />
+                    android:hint="@string/hours" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -177,7 +177,7 @@
                     android:id="@+id/etEndMinutes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="minutes" />
+                    android:hint="@string/minutes" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 

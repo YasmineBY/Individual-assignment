@@ -26,5 +26,11 @@
     <string name="year">year</string>
     <string name="edit_custom_prayer">Edit custom prayer</string>
     <string name="update_text">update</string>
+    <string name="starts_at">Starts at</string>
+    <string name="ends_at">Ends at</string>
+    <string name="hours">hours</string>
+    <string name="minutes">minutes</string>
+    <string name="country">country</string>
+    <string name="city">city</string>
 
 </resources>

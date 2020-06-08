@@ -12,7 +12,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Current location: Netherlands, Berkhout"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +37,7 @@
                 android:id="@+id/etRetrievedPrayerCountry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="country" />
+                android:hint="@string/country" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -49,7 +48,7 @@
                 android:id="@+id/etRetrievedPrayerCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="city" />
+                android:hint="@string/city" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>

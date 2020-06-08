@@ -18,7 +18,6 @@ class CustomPrayerAdapter(
 ) :
 
     RecyclerView.Adapter<CustomPrayerAdapter.ViewHolder>() {
-    private lateinit var context: Context
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
@@ -26,11 +25,8 @@ class CustomPrayerAdapter(
         }
 
         fun formatDate(receivedDate: Date): String {
-
             var formatDate: SimpleDateFormat? = SimpleDateFormat("hh:mm a\n MMM d yyyy ")
-             println(receivedDate.time)
             var formattedDate = formatDate?.format(receivedDate)
-
             return formattedDate.toString()
         }
 

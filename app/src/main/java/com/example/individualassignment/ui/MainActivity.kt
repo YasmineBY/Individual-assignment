@@ -27,7 +27,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var prayers: ArrayList<CustomPrayer>
     private lateinit var recyclerView: RecyclerView
@@ -48,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         initNavigation()
         createSharedPreferences()
     }
+
     fun checkPreferenceValue(stringValue: String?): Boolean {
         return stringValue.toString().trim().length != 0
     }
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.rvCustomPrayers)
         prayers = arrayListOf()
         customPrayerAdapter = CustomPrayerAdapter(prayers,
-            { customPrayer ->    showEditDialog(customPrayer) })
+            { customPrayer -> showEditDialog(customPrayer) })
 
         viewManager = LinearLayoutManager(this)
         createItemTouchHelper().attachToRecyclerView(recyclerView)
@@ -93,8 +93,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
     private fun observeViewModel() {
         viewModel.listOfPrayers.observe(this, Observer { prayers ->
             this@MainActivity.prayers.clear()
@@ -105,13 +103,9 @@ class MainActivity : AppCompatActivity() {
 
 
     fun initNavigation() {
-
         btnListRetrievePrayers.setOnClickListener {
             val intent = Intent(this@MainActivity, PrayerTimesActivity::class.java)
             startActivity(intent)
-        }
-        btnHome.setOnClickListener {
-//            viewModel.addNewCustomPrayer(customPrayer)
         }
         btnAddPrayers.setOnClickListener {
             showAddNewCustomPrayer()
@@ -120,7 +114,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //todo maybe uodate this function later (probably not)
     private fun showAddNewCustomPrayer() {
         val builder = AlertDialog.Builder(this)
         val dialogLayout = layoutInflater.inflate(R.layout.content_add_custom_prayer, null)
@@ -147,20 +140,25 @@ class MainActivity : AppCompatActivity() {
             var newName: String = prayerName.getText().toString()
 
             var startDay: Int = day.text.toString().toInt()
-            var startMonth = month.text.toString().toInt() -1
+            var startMonth = month.text.toString().toInt() - 1
             var startYear = year.text.toString().toInt()
             var startingHours = hours.text.toString().toInt()
             var startMinutes = startMinutes.text.toString().toInt()
 
             var endingDay: Int = endDayText.text.toString().toInt()
-            var endingMonth = endMonthText.text.toString().toInt() -1
+            var endingMonth = endMonthText.text.toString().toInt() - 1
             var endingYear = endYearText.text.toString().toInt()
             var endingTimeHours = endTimeText.text.toString().toInt()
             var endingTimeMinutes = etEndTimeMinutes.text.toString().toInt()
 
-            startOfPrayerDate.set(startYear, startMonth, startDay, startingHours, startMinutes )
-            endOfPrayerDate.set(endingYear, endingMonth,  endingDay,endingTimeHours,  endingTimeMinutes)
-
+            startOfPrayerDate.set(startYear, startMonth, startDay, startingHours, startMinutes)
+            endOfPrayerDate.set(
+                endingYear,
+                endingMonth,
+                endingDay,
+                endingTimeHours,
+                endingTimeMinutes
+            )
 
 
             var newCustomPrayer: CustomPrayer = CustomPrayer(
@@ -171,8 +169,6 @@ class MainActivity : AppCompatActivity() {
 
             return newCustomPrayer
         }
-
-
 
         dialogLayout.btnCancelCustomPrayer.setOnClickListener {
             val intent = Intent(this@MainActivity, MainActivity::class.java)
@@ -189,47 +185,43 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
     fun updateExistingPrayer(dialogLayout: View, prayerId: Long?): CustomPrayer {
-        var prayerName = dialogLayout.findViewById<EditText>(R.id.etEditCustomPrayerName).text.toString()
-
-
+        var prayerName =
+            dialogLayout.findViewById<EditText>(R.id.etEditCustomPrayerName).text.toString()
         var startDay = dialogLayout.findViewById<EditText>(R.id.etEditDay).text.toString().toInt()
-        var startMonth = dialogLayout.findViewById<EditText>(R.id.etEditMonth).text.toString().toInt() -1
+        var startMonth =
+            dialogLayout.findViewById<EditText>(R.id.etEditMonth).text.toString().toInt() - 1
         var startYear = dialogLayout.findViewById<EditText>(R.id.etEditYear).text.toString().toInt()
-        var startHour = dialogLayout.findViewById<EditText>(R.id.etEditStartHours).text.toString().toInt()
-        var startMinutes = dialogLayout.findViewById<EditText>(R.id.etEditStartMinutes).text.toString().toInt()
-//        var startDay = dayStart.text.toString().toInt()
-
+        var startHour =
+            dialogLayout.findViewById<EditText>(R.id.etEditStartHours).text.toString().toInt()
+        var startMinutes =
+            dialogLayout.findViewById<EditText>(R.id.etEditStartMinutes).text.toString().toInt()
         var endDay = dialogLayout.findViewById<EditText>(R.id.etEditEndDay).text.toString().toInt()
-        var endMonth = dialogLayout.findViewById<EditText>(R.id.etEditEndMonth).text.toString().toInt() -1
-        var endYear = dialogLayout.findViewById<EditText>(R.id.etEditEndYear).text.toString().toInt()
-        var endHour = dialogLayout.findViewById<EditText>(R.id.etEditEndHours).text.toString().toInt()
-        var endMinutes = dialogLayout.findViewById<EditText>(R.id.etEditEndMinutes).text.toString().toInt()
-
-
+        var endMonth =
+            dialogLayout.findViewById<EditText>(R.id.etEditEndMonth).text.toString().toInt() - 1
+        var endYear =
+            dialogLayout.findViewById<EditText>(R.id.etEditEndYear).text.toString().toInt()
+        var endHour =
+            dialogLayout.findViewById<EditText>(R.id.etEditEndHours).text.toString().toInt()
+        var endMinutes =
+            dialogLayout.findViewById<EditText>(R.id.etEditEndMinutes).text.toString().toInt()
         var startDate = Calendar.getInstance()
-        startDate.set(startYear, startMonth, startDay, startHour, startMinutes)
-
-
         var endDate = Calendar.getInstance()
+
+        startDate.set(startYear, startMonth, startDay, startHour, startMinutes)
         endDate.set(endYear, endMonth, endDay, endHour, endMinutes)
 
-
-        var newPrayer: CustomPrayer =  CustomPrayer(
+        var newPrayer: CustomPrayer = CustomPrayer(
             prayerName,
             startDate.time,
             endDate.time,
             prayerId
 
         )
-
         return newPrayer
     }
 
-    fun prefilllDialog(dialogLayout: View, prayer: CustomPrayer)    {
-        //todo edit the ehader of the edit screen so it says edit prayer
+    fun prefilllDialog(dialogLayout: View, prayer: CustomPrayer) {
         var receivedStartPrayerDay = prayer.startTime.time
         var receivedEndPrayerDay = prayer.endTime.time
 
@@ -240,22 +232,31 @@ class MainActivity : AppCompatActivity() {
         var hourFormat: SimpleDateFormat? = SimpleDateFormat("h")
         var minuteformat: SimpleDateFormat? = SimpleDateFormat("m")
 
-        var editPrayerName = dialogLayout.findViewById<EditText>(R.id.etEditCustomPrayerName).setText(prayer.prayerName)
+        var editPrayerName = dialogLayout.findViewById<EditText>(R.id.etEditCustomPrayerName)
+            .setText(prayer.prayerName)
 
-        var editStartDay = dialogLayout.findViewById<EditText>(R.id.etEditDay).setText(dayFormat?.format(receivedStartPrayerDay))
-        var editStartMonth = dialogLayout.findViewById<EditText>(R.id.etEditMonth).setText(monthFormat?.format(receivedStartPrayerDay))
-        var editStartYear = dialogLayout.findViewById<EditText>(R.id.etEditYear).setText(yearFormat?.format(receivedStartPrayerDay))
-        var editStartHours = dialogLayout.findViewById<EditText>(R.id.etEditStartHours).setText(hourFormat?.format(receivedStartPrayerDay))
-        var editStartMinutes = dialogLayout.findViewById<EditText>(R.id.etEditStartMinutes).setText(minuteformat?.format(receivedStartPrayerDay))
+        var editStartDay = dialogLayout.findViewById<EditText>(R.id.etEditDay)
+            .setText(dayFormat?.format(receivedStartPrayerDay))
+        var editStartMonth = dialogLayout.findViewById<EditText>(R.id.etEditMonth)
+            .setText(monthFormat?.format(receivedStartPrayerDay))
+        var editStartYear = dialogLayout.findViewById<EditText>(R.id.etEditYear)
+            .setText(yearFormat?.format(receivedStartPrayerDay))
+        var editStartHours = dialogLayout.findViewById<EditText>(R.id.etEditStartHours)
+            .setText(hourFormat?.format(receivedStartPrayerDay))
+        var editStartMinutes = dialogLayout.findViewById<EditText>(R.id.etEditStartMinutes)
+            .setText(minuteformat?.format(receivedStartPrayerDay))
 
 
-        var editEndDay = dialogLayout.findViewById<EditText>(R.id.etEditEndDay).setText(dayFormat?.format(receivedEndPrayerDay))
-        var editEndMonth = dialogLayout.findViewById<EditText>(R.id.etEditEndMonth).setText(monthFormat?.format(receivedEndPrayerDay))
-        var editEndYear = dialogLayout.findViewById<EditText>(R.id.etEditEndYear).setText(yearFormat?.format(receivedEndPrayerDay))
-        var editEndtHours = dialogLayout.findViewById<EditText>(R.id.etEditEndHours).setText(hourFormat?.format(receivedEndPrayerDay))
-        var editEndMinutes = dialogLayout.findViewById<EditText>(R.id.etEditEndMinutes).setText(minuteformat?.format(receivedEndPrayerDay))
-
-
+        var editEndDay = dialogLayout.findViewById<EditText>(R.id.etEditEndDay)
+            .setText(dayFormat?.format(receivedEndPrayerDay))
+        var editEndMonth = dialogLayout.findViewById<EditText>(R.id.etEditEndMonth)
+            .setText(monthFormat?.format(receivedEndPrayerDay))
+        var editEndYear = dialogLayout.findViewById<EditText>(R.id.etEditEndYear)
+            .setText(yearFormat?.format(receivedEndPrayerDay))
+        var editEndtHours = dialogLayout.findViewById<EditText>(R.id.etEditEndHours)
+            .setText(hourFormat?.format(receivedEndPrayerDay))
+        var editEndMinutes = dialogLayout.findViewById<EditText>(R.id.etEditEndMinutes)
+            .setText(minuteformat?.format(receivedEndPrayerDay))
     }
 
 
@@ -264,7 +265,6 @@ class MainActivity : AppCompatActivity() {
         val dialogLayout = layoutInflater.inflate(R.layout.content_edit_custom_prayer, null)
 
         prefilllDialog(dialogLayout, prayer)
-
         dialogLayout.btnEditCustomPrayer.setOnClickListener {
             viewModel.updateCustomPrayer(updateExistingPrayer(dialogLayout, prayer.id))
             val intent = Intent(this@MainActivity, MainActivity::class.java)
@@ -274,8 +274,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, MainActivity::class.java)
             startActivity(intent)
         }
-
-
         builder.setView(dialogLayout)
         builder.show()
     }
@@ -311,11 +309,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings ->{
+            R.id.action_settings -> {
                 viewModel.deleteAllCustomPrayers()
                 true
             }
