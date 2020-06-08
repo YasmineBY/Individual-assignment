@@ -3,7 +3,6 @@ package com.example.individualassignment.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -43,9 +42,10 @@ class PrayerTimesActivity : AppCompatActivity() {
         iconLoading.visibility = View.VISIBLE
         initalizeRecyclerView()
         initNavigation()
-        getPrayerTimesOfToday()
+        retrievePrayersBasedOnLocation()
+        getDefaultLocationPrayers()
         btnSearchPrayers.setOnClickListener {
-            retrievePrayersFromLocation()
+            retrievePrayersBasedOnLocation()
         }
     }
 
@@ -53,48 +53,55 @@ class PrayerTimesActivity : AppCompatActivity() {
         return fieldText.getText().toString().trim().length != 0
     }
 
-    fun createNotification()    {
+    fun checkFields(): Boolean {
         var validationCheck = false
         var missingFields = ""
         var missingAllFields = "Missing values: Country, City"
         var missingCity = "Missing value:  City"
-        var missingCountry ="Missing value: Country"
+        var missingCountry = "Missing value: Country"
 
-        if (!checkIfFieldIsEmpty(etRetrievedPrayerCountry) && !checkIfFieldIsEmpty(etRetrievedPrayerCity)) {
-            missingFields =  missingAllFields
+        if (!checkIfFieldIsEmpty(etRetrievedPrayerCountry) && !checkIfFieldIsEmpty(
+                etRetrievedPrayerCity
+            )
+        ) {
+            missingFields = missingAllFields
             validationCheck = true
-        } else if  (!checkIfFieldIsEmpty(etRetrievedPrayerCountry)) {
-            missingFields =  missingCountry
+        } else if (!checkIfFieldIsEmpty(etRetrievedPrayerCountry)) {
+            missingFields = missingCountry
             validationCheck = true
-        }   else if (!checkIfFieldIsEmpty(etRetrievedPrayerCity)) {
+        } else if (!checkIfFieldIsEmpty(etRetrievedPrayerCity)) {
             missingFields = missingCity
             validationCheck = true
         }
 
-        if(validationCheck){
+        if (validationCheck) {
             Toast.makeText(this, missingFields, Toast.LENGTH_SHORT).show();
         }
+        println(validationCheck)
+        return validationCheck
 
     }
 
-    fun retrievePrayersFromLocation() {
-        val usernameEditText =
-            findViewById<View>(R.id.etRetrievedPrayerCity) as EditText
-        var sUsername = usernameEditText.getText().toString();
-
-        createNotification()
-        var temp = etRetrievedPrayerCity.text
-        etRetrievedPrayerCountry.text
+    fun getDefaultLocationPrayers() {
+        var currentDate = Calendar.getInstance()
+        val currentMonth: Int = currentDate.get(Calendar.MONTH).toInt() + 1
+        val currentYear: Int = currentDate.get(Calendar.YEAR).toInt()
+        viewModel.getPrayerTimes("Netherlands", "Amsterdam", currentMonth, currentYear)
     }
 
 
     //todo look at month in all calendar functions
-    fun getPrayerTimesOfToday() {
+    fun retrievePrayersBasedOnLocation() {
         var currentDate = Calendar.getInstance()
         val currentMonth: Int = currentDate.get(Calendar.MONTH).toInt() + 1
         val currentYear: Int = currentDate.get(Calendar.YEAR).toInt()
+        var newCountry = etRetrievedPrayerCountry.text.toString()
+        var newCity = etRetrievedPrayerCity.text.toString()
 
-        viewModel.getPrayerTimes("Netherlands", "Amsterdam", currentMonth, currentYear)
+        if (!checkFields()) {
+            viewModel.getPrayerTimes(newCountry, newCity, currentMonth, currentYear)
+            Toast.makeText(this, "Changing up", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
