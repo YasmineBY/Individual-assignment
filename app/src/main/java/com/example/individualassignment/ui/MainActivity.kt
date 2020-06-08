@@ -284,7 +284,7 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
 
-            //          Callback triggered when a user swiped an item.
+            //Callback triggered when a user swiped an item.
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 var customPrayerToDelete = prayers[position]
@@ -306,7 +306,10 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_settings ->{
+                viewModel.deleteAllCustomPrayers()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
 
