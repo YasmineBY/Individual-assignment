@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorAccentPrimary"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -16,12 +16,12 @@
             android:layout_width="403dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@color/colorPrimaryDark">
+            android:background="@color/colorAccentPrimary">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/colorAccentPrimary"
                 android:orientation="horizontal"
                 android:paddingTop="10dp">
 
@@ -32,7 +32,7 @@
                     android:layout_weight="1"
                     android:paddingLeft="30dp"
                     android:paddingRight="15dp"
-                    android:textColor="@color/colorPrimaryWhite"
+                    android:textColor="@color/colorWhite"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -43,7 +43,7 @@
                     android:layout_weight="1"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
-                    android:textColor="@color/colorPrimaryWhite"
+                    android:textColor="@color/colorWhite"
                     android:textSize="24sp" />
             </LinearLayout>
 

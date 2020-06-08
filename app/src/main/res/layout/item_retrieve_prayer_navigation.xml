@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/colorAccent"
+    android:backgroundTint="@color/colorPrimary"
 
     >
 
@@ -30,8 +30,8 @@
                     android:id="@+id/btnPrayerList"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorPrimary"
-                    android:backgroundTint="@color/colorAccent"
+                    android:background="@color/colorAccentPrimary"
+                    android:backgroundTint="@color/colorPrimary"
                     android:orientation="horizontal"
 
                     >
@@ -42,7 +42,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/ic_list_black_24dp"
-                        android:backgroundTint="@color/colorPrimaryWhite"
+                        android:backgroundTint="@color/colorClickedComponent"
                         android:textColorHighlight="#FFFFFF"
                         android:textColorLink="#FFFFFF" />
 
@@ -52,7 +52,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/ic_home_black_24dp"
-                        android:backgroundTint="@color/colorPrimaryWhite" />
+                        android:backgroundTint="@color/colorWhite" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--<resources>-->
+<?xml version="1.0" encoding="utf-8"?><!--<resources>-->
 <!--    <color name="colorPrimary">#1E6540</color>-->
 <!--    <color name="colorPrimaryDark">#204E36</color>-->
-<!--&lt;!&ndash;    <color name="colorPrimary">#1E6540</color>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <color name="colorPrimary">#1E6540</color>&ndash;&gt;&ndash;&gt;-->
 <!--    <color name="colorPrimaryAccent">#33BC75</color>-->
 <!--    <color name="colorAccent">#085E32</color>-->
 <!--    <color name="colorPrimaryWhite">#FFFFFF</color>-->
@@ -10,10 +9,9 @@
 
 <!--</resources>-->
 <resources>
-<color name="colorPrimary">#1E6540</color>
-<color name="colorPrimaryDark">#204E36</color>
-<color name="colorPrimaryAccent">#33BC75</color>
-<color name="colorAccent">#085E32</color>
-<color name="colorPrimaryWhite">#FFFFFF</color>
-<color name="colorPrimaryLighter">#0FF396</color>
+    <color name="colorPrimary">#204E36</color>
+    <color name="colorAccentPrimary">#2A8857</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorClickedComponent">#63CF97</color>
+
 </resources>

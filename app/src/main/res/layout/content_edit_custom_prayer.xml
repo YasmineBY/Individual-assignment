@@ -14,9 +14,9 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:text="@string/edit_custom_prayer"
-            android:textColor="@color/colorPrimaryWhite"
+            android:textColor="@color/colorWhite"
             android:textSize="30sp" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -190,19 +190,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/colorPrimary"
                 android:text="@string/cancel"
-                android:textColor="@color/colorPrimaryWhite"
-                android:textColorHighlight="@color/colorAccent" />
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorPrimary" />
 
             <Button
                 android:id="@+id/btnEditCustomPrayer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorPrimaryLighter"
+                android:background="@color/colorAccentPrimary"
                 android:text="@string/update_text"
-                android:textColor="@color/colorPrimaryWhite" />
+                android:textColor="@color/colorWhite" />
 
         </LinearLayout>
 
