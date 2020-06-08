@@ -91,6 +91,7 @@ class PrayerTimesActivity : AppCompatActivity() {
 
 
     //todo look at month in all calendar functions
+    //todo implement shared preferences manager for the lcation
     fun retrievePrayersBasedOnLocation() {
         var currentDate = Calendar.getInstance()
         val currentMonth: Int = currentDate.get(Calendar.MONTH).toInt() + 1
@@ -100,7 +101,7 @@ class PrayerTimesActivity : AppCompatActivity() {
 
         if (!checkFields()) {
             viewModel.getPrayerTimes(newCountry, newCity, currentMonth, currentYear)
-            Toast.makeText(this, "Changing up", Toast.LENGTH_SHORT).show();
+            txtCurrentLocation.text = "Current location: ${newCountry}, ${newCity}"
         }
     }
 
