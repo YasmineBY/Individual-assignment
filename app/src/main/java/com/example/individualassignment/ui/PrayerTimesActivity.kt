@@ -43,7 +43,6 @@ class PrayerTimesActivity : AppCompatActivity() {
         iconLoading.visibility = View.VISIBLE
         initalizeRecyclerView()
         initNavigation()
-        createSharedPreferences()
         retrievePrayersBasedOnLocation()
         getDefaultLocationPrayers()
         btnSearchPrayers.setOnClickListener {
@@ -99,6 +98,7 @@ class PrayerTimesActivity : AppCompatActivity() {
     }
 
 
+
     //todo look at month in all calendar functions
     //todo implement shared preferences manager for the lcation
     fun retrievePrayersBasedOnLocation() {
@@ -121,10 +121,7 @@ class PrayerTimesActivity : AppCompatActivity() {
         }
     }
 
-    fun checkPreferenceValue(stringValue: String?): Boolean {
-        return stringValue.toString().trim().length != 0
 
-    }
 
     fun updateSharedPreferences(country: String, city: String) {
         val prefs = this.getSharedPreferences(USER_LOCATION, 0)
@@ -136,21 +133,7 @@ class PrayerTimesActivity : AppCompatActivity() {
         editor.commit()
     }
 
-    fun createSharedPreferences() {
-        val prefs = this.getSharedPreferences(USER_LOCATION, 0)
-        val editor = prefs.edit()
-        editor.putString("COUNTRY", "")
-        editor.putString("CITY", "")
 
-        if (!checkPreferenceValue(prefs.getString("COUNTRY", ""))) {
-            editor.putString("COUNTRY", "Netherlands")
-        }
-        if (!checkPreferenceValue(prefs.getString("CITY", ""))) {
-            editor.putString("CITY", "Hoorn")
-        }
-
-        editor.commit()
-    }
 
 
     private fun preparePrayerDataListView(prayers: Array<PrayerDetails>): ArrayList<ListViewPrayer> {
