@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.item_navigation.*
 import java.util.*
 import kotlin.collections.ArrayList
 
+const val USER_LOCATION = "user_location"
 
 class PrayerTimesActivity : AppCompatActivity() {
 
@@ -42,11 +43,13 @@ class PrayerTimesActivity : AppCompatActivity() {
         iconLoading.visibility = View.VISIBLE
         initalizeRecyclerView()
         initNavigation()
+        createSharedPreferences()
         retrievePrayersBasedOnLocation()
         getDefaultLocationPrayers()
         btnSearchPrayers.setOnClickListener {
             retrievePrayersBasedOnLocation()
         }
+
     }
 
     fun checkIfFieldIsEmpty(fieldText: TextInputEditText): Boolean {
@@ -86,7 +89,13 @@ class PrayerTimesActivity : AppCompatActivity() {
         var currentDate = Calendar.getInstance()
         val currentMonth: Int = currentDate.get(Calendar.MONTH).toInt() + 1
         val currentYear: Int = currentDate.get(Calendar.YEAR).toInt()
-        viewModel.getPrayerTimes("Netherlands", "Amsterdam", currentMonth, currentYear)
+
+        val prefs = this.getSharedPreferences(USER_LOCATION, 0)
+        var prefCountry = prefs.getString("COUNTRY", "").toString()
+        var prefCity = prefs.getString("CITY", "").toString()
+
+
+        viewModel.getPrayerTimes(prefCountry, prefCity, currentMonth, currentYear)
     }
 
 
@@ -94,15 +103,53 @@ class PrayerTimesActivity : AppCompatActivity() {
     //todo implement shared preferences manager for the lcation
     fun retrievePrayersBasedOnLocation() {
         var currentDate = Calendar.getInstance()
-        val currentMonth: Int = currentDate.get(Calendar.MONTH).toInt() + 1
-        val currentYear: Int = currentDate.get(Calendar.YEAR).toInt()
+        val currentMonth: Int = currentDate.get(Calendar.MONTH) + 1
+        val currentYear: Int = currentDate.get(Calendar.YEAR)
         var newCountry = etRetrievedPrayerCountry.text.toString()
         var newCity = etRetrievedPrayerCity.text.toString()
 
+        val prefs = this.getSharedPreferences(USER_LOCATION, 0)
+        var prefCountry = prefs.getString("COUNTRY", "").toString()
+        var prefCity = prefs.getString("CITY", "").toString()
+
+        txtCurrentLocation.text = "Current location: ${prefCountry}, ${prefCity}"
+
         if (!checkFields()) {
-            viewModel.getPrayerTimes(newCountry, newCity, currentMonth, currentYear)
+            updateSharedPreferences(newCountry, newCity)
             txtCurrentLocation.text = "Current location: ${newCountry}, ${newCity}"
+            viewModel.getPrayerTimes(prefCountry, prefCity, currentMonth, currentYear)
         }
+    }
+
+    fun checkPreferenceValue(stringValue: String?): Boolean {
+        return stringValue.toString().trim().length != 0
+
+    }
+
+    fun updateSharedPreferences(country: String, city: String) {
+        val prefs = this.getSharedPreferences(USER_LOCATION, 0)
+        val editor = prefs.edit()
+
+        editor.putString("COUNTRY", country)
+        editor.putString("CITY", city)
+
+        editor.commit()
+    }
+
+    fun createSharedPreferences() {
+        val prefs = this.getSharedPreferences(USER_LOCATION, 0)
+        val editor = prefs.edit()
+        editor.putString("COUNTRY", "")
+        editor.putString("CITY", "")
+
+        if (!checkPreferenceValue(prefs.getString("COUNTRY", ""))) {
+            editor.putString("COUNTRY", "Netherlands")
+        }
+        if (!checkPreferenceValue(prefs.getString("CITY", ""))) {
+            editor.putString("CITY", "Hoorn")
+        }
+
+        editor.commit()
     }
 
 
