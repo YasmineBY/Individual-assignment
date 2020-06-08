@@ -175,9 +175,15 @@ class MainActivity : AppCompatActivity() {
 
 
         dialogLayout.btnCancelCustomPrayer.setOnClickListener {
-            viewModel.addNewCustomPrayer(getNewPrayer())
+            val intent = Intent(this@MainActivity, MainActivity::class.java)
+            startActivity(intent)
         }
 
+        dialogLayout.btnAddCustomPrayer.setOnClickListener {
+            viewModel.addNewCustomPrayer(getNewPrayer())
+            val intent = Intent(this@MainActivity, MainActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }
@@ -261,9 +267,12 @@ class MainActivity : AppCompatActivity() {
 
         dialogLayout.btnEditCustomPrayer.setOnClickListener {
             viewModel.updateCustomPrayer(updateExistingPrayer(dialogLayout, prayer.id))
+            val intent = Intent(this@MainActivity, MainActivity::class.java)
+            startActivity(intent)
         }
         dialogLayout.btnCancelEdit.setOnClickListener {
-           //todo dismiss window
+            val intent = Intent(this@MainActivity, MainActivity::class.java)
+            startActivity(intent)
         }
 
 
