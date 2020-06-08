@@ -35,6 +35,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRetrievedPrayerCountry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="country" />
@@ -45,6 +46,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRetrievedPrayerCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="city" />
@@ -53,7 +55,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnSearchPrayers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@android:string/search_go"
@@ -81,6 +83,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSearchPrayers" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
