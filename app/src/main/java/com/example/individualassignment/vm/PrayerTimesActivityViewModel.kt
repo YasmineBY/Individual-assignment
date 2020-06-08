@@ -20,8 +20,8 @@ class PrayerTimesActivityViewModel(application: Application) : AndroidViewModel(
              var listOfPrayersOnly = MutableLiveData<List<PrayerObject>>()
 
 
-    fun getPrayerTimes() {
-        prayerTimesRepositry.getPrayers().enqueue(object : Callback<ResultObject> {
+    fun getPrayerTimes(country: String, city: String, month: Int, year: Int) {
+        prayerTimesRepositry.getPrayers(country, city, month, year).enqueue(object : Callback<ResultObject> {
             override fun onResponse(call: Call<ResultObject>, response: Response<ResultObject>) {
                 if (response.isSuccessful) {
                     var results = response.body()

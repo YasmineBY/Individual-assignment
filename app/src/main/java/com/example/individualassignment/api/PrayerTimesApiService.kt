@@ -14,16 +14,26 @@ interface PrayerTimesApiService {
 //    @GET("v1/calendarByAddress?address=Netherlands, Amsterdam&method=2")
 
 
-
     @GET("v1/calendarByAddress ")
     fun getPrayerTimes(
-        @Query("address") country: String = "Netherlands",
-        @Query("address") city: String = "Amsterdam",
-        @Query("method") method: String = "2",
-        @Query("month") month:String  = "06",
-        @Query("year") year: Int = 2020
+        @Query("address") country: String,
+        @Query("address") city: String ,
+        @Query("month") month:Int,
+        @Query("year") year: Int,
+        @Query("method") method: Int = 2
 
     ): Call<ResultObject>
+
+
+
+//    @GET("v1/calendarByAddress ")
+//    fun getPrayerTimes(
+//        @Query("address") country: String = "Netherlands",
+//        @Query("address") city: String = "Amsterdam",
+//        @Query("method") method: String = "2",
+//        @Query("month") month:String  = "06",
+//        @Query("year") year: Int = 2020
+//    ): Call<ResultObject>
 
 
 

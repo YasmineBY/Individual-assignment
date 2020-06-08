@@ -39,12 +39,17 @@ class PrayerTimesActivity : AppCompatActivity() {
         iconLoading.visibility = View.VISIBLE
         initalizeRecyclerView()
         initNavigation()
-        viewModel.getPrayerTimes()
+        getPrayerTimesOfToday()
     }
 
-    fun getPrayerTimesOfToday() {
-//        month=04&year=2017
 
+    
+    //todo look at month in all calendar functions
+    fun getPrayerTimesOfToday() {
+        var currentDate = Calendar.getInstance()
+        val currentMonth: Int = currentDate.get(Calendar.MONTH).toInt() +1
+        val currentYear: Int = currentDate.get(Calendar.YEAR).toInt()
+        viewModel.getPrayerTimes("Netherlands", "Amsterdam", currentMonth, currentYear)
     }
 
 
