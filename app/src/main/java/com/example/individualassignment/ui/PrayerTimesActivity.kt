@@ -42,6 +42,12 @@ class PrayerTimesActivity : AppCompatActivity() {
         viewModel.getPrayerTimes()
     }
 
+    fun getPrayerTimesOfToday() {
+//        month=04&year=2017
+
+    }
+
+
     private fun preparePrayerDataListView(prayers: Array<PrayerDetails>): ArrayList<ListViewPrayer> {
         //to-do
         //Make API call: This month, this year. : ListOfPrayers[Today] only

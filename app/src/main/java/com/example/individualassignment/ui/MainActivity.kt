@@ -1,5 +1,6 @@
 package com.example.individualassignment.ui
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -26,7 +27,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-const val CUSTOM_PRAYER: String = "CUSTOM_PRAYER"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var prayers: ArrayList<CustomPrayer>
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.rvCustomPrayers)
         prayers = arrayListOf()
         customPrayerAdapter = CustomPrayerAdapter(prayers,
-            { customPrayer -> onCustomPrayerClick(customPrayer) })
+            { customPrayer ->    showEditDialog(customPrayer) })
 
         viewManager = LinearLayoutManager(this)
         createItemTouchHelper().attachToRecyclerView(recyclerView)
@@ -76,45 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun onCustomPrayerClick(prayer: CustomPrayer) {
-        showEditDialog(prayer)
-        val prefs = this.getSharedPreferences("CUSTOM_PRAYER", 0)
-        val editor = prefs.edit()
 
-        editor.putString("PRAYER_NAME", prayer.prayerName)
-        editor.putString("START_TIME", prayer.startTime.toString())
-        editor.putString("END_TIME", prayer.endTime.toString())
-        editor.putString("ID", prayer.id.toString())
-        editor.commit()
-
-
-//        data class CustomPrayer (
-//            var prayerName: String,
-//            var prayerDate: Date,
-//            var startTime: Date,
-//            var endTime: Date,
-//            @PrimaryKey(autoGenerate = true)
-//            var id: Long? = null
-        var customPrayer = CustomPrayer(
-            prayer.prayerName,
-            prayer.endTime,
-            prayer.startTime,
-            prayer.id
-
-        )
-
-//        bundle.putString(PRAYER_NAME, prayer.prayerName)s
-
-
-//        var selectedPrayer = prayer
-//        val intent = Intent(this@MainActivity, PopupEditCustomPrayerActivity::class.java)
-        val extras: Bundle? = intent.extras
-        intent.putExtra(CUSTOM_PRAYER, customPrayer)
-
-        startActivity(intent)
-
-
-    }
 
     private fun observeViewModel() {
         viewModel.listOfPrayers.observe(this, Observer { prayers ->
@@ -141,7 +103,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //todo maybe uodate this 
+    //todo maybe uodate this function later (probably not)
     private fun showAddNewCustomPrayer() {
         val builder = AlertDialog.Builder(this)
         val dialogLayout = layoutInflater.inflate(R.layout.content_add_custom_prayer, null)
@@ -180,8 +142,6 @@ class MainActivity : AppCompatActivity() {
             var endingTimeMinutes = etEndTimeMinutes.text.toString().toInt()
 
             startOfPrayerDate.set(startYear, startMonth, startDay, startingHours, startMinutes )
-
-
             endOfPrayerDate.set(endingYear, endingMonth,  endingDay,endingTimeHours,  endingTimeMinutes)
 
 
@@ -200,6 +160,9 @@ class MainActivity : AppCompatActivity() {
         dialogLayout.btnCancelCustomPrayer.setOnClickListener {
             viewModel.addNewCustomPrayer(getNewPrayer())
         }
+
+
+
     }
 
 
